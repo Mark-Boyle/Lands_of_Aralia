@@ -11,3 +11,8 @@ def display_intro_message
     puts "One brave, adventurous soul has set out on a quest\nto find it!"
     puts ' '
 end
+
+def get_name
+    puts "Please enter the name of your character:"
+    gets.chomp
+end
