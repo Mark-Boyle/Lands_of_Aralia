@@ -33,9 +33,9 @@ end
 def explain_available_items
     puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
     puts "You have with you:"
-    puts " - A Sword"
-    puts " - A Bow and some arrows"
-    puts " - Armour with a rating of #{10}"
+    puts " - Sword"
+    puts " - Bow and Arrows"
+    puts " - Armour"
     puts ' '
     puts "Throughout the land you may be lucky enough to find:"
     puts " - Health Potions"
@@ -60,6 +60,15 @@ def enemy_attack(character_health, damage, enemy_attacks)
     character_health
 end
 
+def display_info(enemy_health, character_health)
+    puts '--' * 20
+    puts ' '
+    puts "Dragon Health: #{enemy_health}"
+    puts "Your Health #{character_health}"
+    puts ' '
+    puts '--' * 20
+end
+
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 enemy_attacks = ['breath fire', 'tail whip', 'slash']
 
@@ -70,9 +79,10 @@ dragon = Enemy.new('Dragon', 150, 8)
 
 
 select_character
+character.update_elf_stats
 character.display_character_info
 explain_available_items
-character.update_elf_stats
+
 
 #First Scene
 while dragon::enemy_health > 0 && character::character_health > 0
