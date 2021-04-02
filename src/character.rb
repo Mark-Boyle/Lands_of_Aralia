@@ -27,4 +27,14 @@ class Character
         @archery_skill += 5
         @armour_rating = armour_rating
     end
+
+    def generate_sword_damage
+        attack_damage = rand(30) + (@sword_skill * 2)
+        attack_damage
+    end
+
+    def generate_archery_damage
+        attack_damage = rand(30) + (@archery_skill * 2)
+        attack_damage
+    end
 end

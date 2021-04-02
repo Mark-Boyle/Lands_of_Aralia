@@ -48,6 +48,18 @@ def explain_available_items
     gets
 end
 
+def character_attack(enemy_health, damage)
+    puts "You delivered #{damage} points of damage!"
+    enemy_health = enemy_health - damage
+    enemy_health
+end
+
+def enemy_attack(character_health, damage, enemy_attacks)
+    puts "The dragon attacked you with #{enemy_attacks.sample} and did #{damage} points of damage!"
+    character_health = character_health - damage
+    character_health
+end
+
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 enemy_attacks = ['breath fire', 'tail whip', 'slash']
 
@@ -71,7 +83,7 @@ while dragon::enemy_health > 0 && character::character_health > 0
     case input
     when "Use Sword"
         dragon::enemy_health = character_attack(dragon::enemy_health, character.generate_sword_damage)
-        puts ' '
+        puts ' '    
     when "Shoot Arrow"
         dragon::enemy_health = character_attack(dragon::enemy_health, character.generate_archery_damage)
         puts ' '
