@@ -1,3 +1,4 @@
+#Introduction
 def display_intro_message
     puts ' '
     puts 'Welcome to the Adventure Game!!'
@@ -14,11 +15,13 @@ end
 
 def get_name
     puts "Please enter the name of your character:"
-    gets.chomp
+    name = gets.chomp
+    puts ' '
+    puts "Welcome #{name}!"
 end
 
 def explain_available_items
-    puts "Welcome #{@name}"
+    
     puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
     puts "You have with you:"
     puts " - A Sword"
@@ -39,3 +42,5 @@ end
 display_intro_message
 get_name
 explain_available_items
+
+#First Scene
