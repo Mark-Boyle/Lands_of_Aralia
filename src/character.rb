@@ -19,4 +19,12 @@ class Character
         puts "Archery: #{@archery_skill}"
         puts "Armour: #{@armour_rating}"
     end
+
+    def update_elf_stats
+        @character_type = 'Elf'
+        @character_health = character_health
+        @sword_skill += 2
+        @archery_skill += 5
+        @armour_rating = armour_rating
+    end
 end

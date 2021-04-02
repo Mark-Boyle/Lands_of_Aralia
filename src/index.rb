@@ -18,7 +18,7 @@ end
 
 def select_character
 puts "Please select your character:"
-input = gets.downcase
+gets.downcase
 end
 
 def select_name
@@ -47,12 +47,15 @@ def explain_available_items
 end
 
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
+enemy_attacks = ['breath fire', 'tail whip', 'slash']
 
 display_intro_message
 
 character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
 select_character
-explain_available_items
 character.display_character_info
+explain_available_items
+character.update_elf_stats
+
 
 #First Scene
