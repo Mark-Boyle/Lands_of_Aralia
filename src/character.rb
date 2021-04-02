@@ -10,4 +10,13 @@ class Character
         @armour_rating = armour_rating
         @actions = actions
     end
+
+    def display_character_info
+        puts "Character Information:"
+        puts "Type: #{@type}"
+        puts "Health: #{@character_health}"
+        puts "Sword: #{@sword_skill}"
+        puts "Archery: #{@archery_skill}"
+        puts "Armour: #{@armour_rating}"
+    end
 end

@@ -1,3 +1,5 @@
+require_relative('character')
+
 #Introduction
 def display_intro_message
     puts ' '
@@ -13,7 +15,13 @@ def display_intro_message
     puts ' '
 end
 
-def get_name
+
+def select_character
+puts "Please select your character:"
+input = gets.downcase
+end
+
+def select_name
     puts "Please enter the name of your character:"
     name = gets.chomp
     puts ' '
@@ -21,7 +29,6 @@ def get_name
 end
 
 def explain_available_items
-    
     puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
     puts "You have with you:"
     puts " - A Sword"
@@ -39,8 +46,13 @@ def explain_available_items
     gets
 end
 
+actions = ["Use Sword", "Shoot Arrow", "Search Area"]
+
 display_intro_message
-get_name
+
+character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
+select_character
 explain_available_items
+character.display_character_info
 
 #First Scene
