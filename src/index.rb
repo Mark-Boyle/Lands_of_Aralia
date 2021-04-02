@@ -16,3 +16,26 @@ def get_name
     puts "Please enter the name of your character:"
     gets.chomp
 end
+
+def explain_available_items
+    puts "Welcome #{@name}"
+    puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
+    puts "You have with you:"
+    puts " - A Sword"
+    puts " - A Bow and some arrows"
+    puts " - Armour with a rating of #{10}"
+    puts ' '
+    puts "Throughout the land you may be lucky enough to find:"
+    puts " - Health Potions"
+    puts " - Extreme Health Potions"
+    puts " - Improved Armour"
+    puts ' '
+    puts "You're all set to begin your adventure!"
+    puts ' '
+    puts "<Press Enter to begin>"
+    gets
+end
+
+display_intro_message
+get_name
+explain_available_items
