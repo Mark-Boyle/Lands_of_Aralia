@@ -8,7 +8,7 @@ class Enemy
     end
 
     def generate_attack_damage
-       attack_damage = rand(10..40) + @attacking_force
+       attack_damage = rand(10..30) + @attacking_force
        attack_damage
     end
 
@@ -16,6 +16,12 @@ class Enemy
         @type = 'Goblin'
         @enemy_health = 70
         @attacking_force = 0
+    end
+
+    def update_troll_stats
+        @type = 'Troll'
+        @enemy_health = 100
+        @attacking_force = 3
     end
 
     def update_dragon_stats

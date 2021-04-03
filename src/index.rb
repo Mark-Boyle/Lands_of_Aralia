@@ -79,6 +79,7 @@ lives = 3
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 dragon_attacks = ['breath fire', 'tail whip', 'slash']
 goblin_attacks = ['scratch', 'throw spear', 'bite']
+troll_attacks = ['swing club', 'punch', 'stomp']
 
 display_intro_message
 
@@ -93,71 +94,113 @@ explain_available_items
 
 
 #First Scene
-enemy.update_goblin_stats
+while level == 1 && lives > 0
+    enemy.update_goblin_stats
 
-while enemy::enemy_health > 0 && character::character_health > 0
-    puts "Choose your action:"
-    input = gets.chomp
-    system 'clear'  
-    puts ' '
-    case input
-    when "Use Sword"
-        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
-        puts ' '    
-    when "Shoot Arrow"
-        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+    while enemy::enemy_health > 0 && character::character_health > 0
+        puts "Choose your action:"
+        input = gets.chomp
+        system 'clear'  
         puts ' '
-    when "Search Area"
-        character.search_area
+        case input
+        when "Use Sword"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
+            puts ' '    
+        when "Shoot Arrow"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Search Area"
+            character.search_area
+        end
+
+        character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, goblin_attacks, enemy::type)
+        puts ' '
+        display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
 
-    character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, goblin_attacks, enemy::type)
-    puts ' '
-    display_info(enemy::enemy_health, character::character_health, enemy::type)
-end
 
 
-if character::character_health > 0
-    puts 'You won!'
-    level += 1
-else 
-    puts 'You lost!'
-    lives -= 1
+    if character::character_health > 0
+        puts 'You won!'
+        level += 1
+    else 
+        puts 'You lost!'
+        lives -= 1
+    end
 end
 
 #Second Scene
+while level == 2 && lives > 0
+    character.display_character_info
+    enemy.update_troll_stats
+    character.restore_health
+    character.display_character_info
 
-character.display_character_info
-enemy.update_dragon_stats
-character.restore_health
-character.display_character_info
-
-while enemy::enemy_health > 0 && character::character_health > 0
-    puts "Choose your action:"
-    input = gets.chomp
-    system 'clear'  
-    puts ' '
-    case input
-    when "Use Sword"
-        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
-        puts ' '    
-    when "Shoot Arrow"
-        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+    while enemy::enemy_health > 0 && character::character_health > 0
+        puts "Choose your action:"
+        input = gets.chomp
+        system 'clear'  
         puts ' '
-    when "Search Area"
-        character.search_area
+        case input
+        when "Use Sword"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
+            puts ' '    
+        when "Shoot Arrow"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Search Area"
+            character.search_area
+        end
+
+        character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, troll_attacks, enemy::type)
+        puts ' '
+        display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
 
-    character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type)
-    puts ' '
-    display_info(enemy::enemy_health, character::character_health, enemy::type)
+
+    if character::character_health > 0
+        puts 'You won!'
+        level += 1
+    else 
+        puts 'You lost!'
+        lives -= 1
+    end
 end
 
+#Third Scene
+while level == 3 && lives > 0
+    character.display_character_info
+    enemy.update_dragon_stats
+    character.restore_health
+    character.display_character_info
 
-if character::character_health > 0
-    puts 'You won!'
-    level += 1
-else 
-    puts 'You lost!'
-    lives -= 1
+    while enemy::enemy_health > 0 && character::character_health > 0
+        puts "Choose your action:"
+        input = gets.chomp
+        system 'clear'  
+        puts ' '
+        case input
+        when "Use Sword"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
+            puts ' '    
+        when "Shoot Arrow"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Search Area"
+            character.search_area
+        end
+
+        character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type)
+        puts ' '
+        display_info(enemy::enemy_health, character::character_health, enemy::type)
+    end
+
+
+    if character::character_health > 0
+        puts 'You won!'
+        level += 1
+    else 
+        puts 'You lost!'
+        lives -= 1
+    end
 end

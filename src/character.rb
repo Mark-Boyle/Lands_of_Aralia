@@ -66,16 +66,26 @@ class Character
     end
 
     def generate_sword_damage
-        attack_damage = rand(30) + (@sword_skill * 2)
+        attack_damage = rand(30) + (@sword_skill * 3)
         attack_damage
     end
 
     def generate_archery_damage
-        attack_damage = rand(30) + (@archery_skill * 2)
+        attack_damage = rand(30) + (@archery_skill * 3)
         attack_damage
     end
 
-    def restore_health
-        @character_health = 100
+    def restore_health(level)
+        case level
+        when level == 1
+            @character_health = 100
+        when level == 2
+            @character_health = 120
+        when level == 3
+            @character_health = 140
+        when level == 4
+            @character_health = 160
+        end
+        if  
     end
 end
