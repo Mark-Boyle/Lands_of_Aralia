@@ -73,6 +73,9 @@ def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
 end
 
+level = 1
+lives = 3
+
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 dragon_attacks = ['breath fire', 'tail whip', 'slash']
 goblin_attacks = ['scratch', 'throw spear', 'bite']
@@ -90,41 +93,7 @@ explain_available_items
 
 
 #First Scene
-
-while enemy::enemy_health > 0 && character::character_health > 0
-    puts "Choose your action:"
-    input = gets.chomp
-    system 'clear'  
-    puts ' '
-    case input
-    when "Use Sword"
-        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
-        puts ' '    
-    when "Shoot Arrow"
-        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
-        puts ' '
-    when "Search Area"
-        character.search_area
-    end
-
-    character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type)
-    puts ' '
-    display_info(enemy::enemy_health, character::character_health, enemy::type)
-end
-
-
-if character::character_health > 0
-    puts 'You won!'
-else 
-    puts 'You lost!'
-end
-
-#Second Scene
-
-character.display_character_info
 enemy.update_goblin_stats
-character.restore_health
-character.display_character_info
 
 while enemy::enemy_health > 0 && character::character_health > 0
     puts "Choose your action:"
@@ -150,6 +119,45 @@ end
 
 if character::character_health > 0
     puts 'You won!'
+    level += 1
 else 
     puts 'You lost!'
+    lives -= 1
+end
+
+#Second Scene
+
+character.display_character_info
+enemy.update_dragon_stats
+character.restore_health
+character.display_character_info
+
+while enemy::enemy_health > 0 && character::character_health > 0
+    puts "Choose your action:"
+    input = gets.chomp
+    system 'clear'  
+    puts ' '
+    case input
+    when "Use Sword"
+        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
+        puts ' '    
+    when "Shoot Arrow"
+        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+        puts ' '
+    when "Search Area"
+        character.search_area
+    end
+
+    character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type)
+    puts ' '
+    display_info(enemy::enemy_health, character::character_health, enemy::type)
+end
+
+
+if character::character_health > 0
+    puts 'You won!'
+    level += 1
+else 
+    puts 'You lost!'
+    lives -= 1
 end

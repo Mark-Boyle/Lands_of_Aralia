@@ -18,5 +18,12 @@ class Enemy
         @attacking_force = 0
     end
 
+    def update_dragon_stats
+        @type = 'Dragon'
+        @enemy_health = 120
+        @attacking_force = 5
+    end
+
+
 
 end
