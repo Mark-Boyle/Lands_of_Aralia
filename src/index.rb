@@ -1,6 +1,9 @@
 require_relative('character')
 require_relative('enemy')
 
+level = 1
+lives = 3
+
 #Introduction
 def display_intro_message
     system 'clear'
@@ -73,8 +76,36 @@ def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
 end
 
-level = 1
-lives = 3
+def display_enemy_intro
+    system 'clear'
+    puts ' '
+    puts "An enemy appears in front of you."
+    puts "It gives you an evil glare and a small smirk appears across it's face."
+    puts "It comes charging at you!"
+    puts ' '
+end
+
+def check_if_gameover(lives)
+    if lives == 0
+        gameover
+    end
+end
+
+def gameover
+    puts 'You fought bravely, but unfortunately you have run out of lives.'
+    puts 'Better Luck next time!'
+    exit
+end
+
+def ask_to_retry_or_quit
+    puts 'Would you like to retry or exit:'
+    input = gets.chomp.downcase
+    if input == 'exit'
+        exit
+    end
+end
+
+
 
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 dragon_attacks = ['breath fire', 'tail whip', 'slash']
@@ -93,9 +124,11 @@ character.display_character_info
 explain_available_items
 
 
-#First Scene
+#First Scene (Goblin)
+display_enemy_intro
 while level == 1 && lives > 0
     enemy.update_goblin_stats
+    character.restore_health(level)
 
     while enemy::enemy_health > 0 && character::character_health > 0
         puts "Choose your action:"
@@ -113,7 +146,7 @@ while level == 1 && lives > 0
             character.search_area
         end
 
-        character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, goblin_attacks, enemy::type)
+        if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, goblin_attacks, enemy::type) end
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
@@ -121,20 +154,25 @@ while level == 1 && lives > 0
 
 
     if character::character_health > 0
-        puts 'You won!'
+        puts "Congratulations! You defeated the #{enemy::type}!"
+        puts ' '
+        puts '<Press Enter to Continue>'
+        gets
         level += 1
     else 
         puts 'You lost!'
         lives -= 1
+        check_if_gameover(lives)
+        ask_to_retry_or_quit
     end
 end
 
-#Second Scene
+#Second Scene (Troll)
+display_enemy_intro
 while level == 2 && lives > 0
-    character.display_character_info
     enemy.update_troll_stats
-    character.restore_health
-    character.display_character_info
+    character.restore_health(level)
+    
 
     while enemy::enemy_health > 0 && character::character_health > 0
         puts "Choose your action:"
@@ -152,27 +190,32 @@ while level == 2 && lives > 0
             character.search_area
         end
 
-        character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, troll_attacks, enemy::type)
+        if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, troll_attacks, enemy::type) end
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
 
 
     if character::character_health > 0
-        puts 'You won!'
+        puts "Congratulations! You defeated the #{enemy::type}!"
+        puts ' '
+        puts '<Press Enter to Continue>'
+        gets
         level += 1
     else 
         puts 'You lost!'
         lives -= 1
+        check_if_gameover(lives)
+        ask_to_retry_or_quit
     end
 end
 
-#Third Scene
+#Third Scene (Dragon)
+display_enemy_intro
 while level == 3 && lives > 0
-    character.display_character_info
     enemy.update_dragon_stats
-    character.restore_health
-    character.display_character_info
+    character.restore_health(level)
+    
 
     while enemy::enemy_health > 0 && character::character_health > 0
         puts "Choose your action:"
@@ -190,17 +233,22 @@ while level == 3 && lives > 0
             character.search_area
         end
 
-        character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type)
+        if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type) end
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
 
 
     if character::character_health > 0
-        puts 'You won!'
+        puts "Congratulations! You defeated the #{enemy::type}!"
+        puts ' '
+        puts '<Press Enter to Continue>'
+        gets
         level += 1
     else 
         puts 'You lost!'
         lives -= 1
+        check_if_gameover(lives)
+        ask_to_retry_or_quit
     end
 end

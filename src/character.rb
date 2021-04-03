@@ -76,16 +76,6 @@ class Character
     end
 
     def restore_health(level)
-        case level
-        when level == 1
-            @character_health = 100
-        when level == 2
-            @character_health = 120
-        when level == 3
-            @character_health = 140
-        when level == 4
-            @character_health = 160
-        end
-        if  
+        @character_health = 100 + (level * 10)
     end
 end
