@@ -1,8 +1,10 @@
 require_relative('character')
 require_relative('enemy')
+require_relative('riddles')
 
 level = 1
 lives = 3
+path = 1
 
 #Introduction
 def display_intro_message
@@ -125,8 +127,9 @@ explain_available_items
 
 
 #First Scene (Goblin)
-display_enemy_intro
+
 while level == 1 && lives > 0
+    display_enemy_intro
     enemy.update_goblin_stats
     character.restore_health(level)
 
@@ -167,9 +170,10 @@ while level == 1 && lives > 0
     end
 end
 
-#Second Scene (Troll)
-display_enemy_intro
-while level == 2 && lives > 0
+#Second Scene - Path 1 (Troll)
+
+while level == 2 && lives > 0 && path == 1
+    display_enemy_intro
     enemy.update_troll_stats
     character.restore_health(level)
     
@@ -210,9 +214,62 @@ while level == 2 && lives > 0
     end
 end
 
+#Second Scene - Path 2 (Orc)
+
+while level == 2 && lives > 0 && path == 1
+    display_enemy_intro
+    enemy.update_orc_stats
+    character.restore_health(level)
+    
+
+    while enemy::enemy_health > 0 && character::character_health > 0
+        puts "Choose your action:"
+        input = gets.chomp
+        system 'clear'  
+        puts ' '
+        case input
+        when "Use Sword"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
+            puts ' '    
+        when "Shoot Arrow"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Search Area"
+            character.search_area
+        end
+
+        if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, orc_attacks, enemy::type) end
+        puts ' '
+        display_info(enemy::enemy_health, character::character_health, enemy::type)
+    end
+
+
+    if character::character_health > 0
+        puts "Congratulations! You defeated the #{enemy::type}!"
+        puts ' '
+        puts '<Press Enter to Continue>'
+        gets
+        level += 1
+    else 
+        puts 'You lost!'
+        lives -= 1
+        check_if_gameover(lives)
+        ask_to_retry_or_quit
+    end
+end
+
+#Third Scene - Path 1 (Witch)
+
+while level == 3 && lives > 0 && path == 1
+    display_enemy_intro
+    run_riddle_scene
+    
+end
+
 #Third Scene (Dragon)
-display_enemy_intro
+
 while level == 3 && lives > 0
+    display_enemy_intro
     enemy.update_dragon_stats
     character.restore_health(level)
     
