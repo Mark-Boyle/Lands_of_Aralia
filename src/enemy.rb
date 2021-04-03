@@ -12,5 +12,11 @@ class Enemy
        attack_damage
     end
 
+    def update_goblin_stats
+        @type = 'Goblin'
+        @enemy_health = 70
+        @attacking_force = 0
+    end
+
 
 end

@@ -12,12 +12,14 @@ class Character
     end
 
     def display_character_info
+        system 'clear'
+        puts ' '
         puts "Character Information:"
-        puts "Type: #{@type}"
+        puts "Type: #{@character_type}"
         puts "Health: #{@character_health}"
-        puts "Sword: #{@sword_skill}"
-        puts "Archery: #{@archery_skill}"
-        puts "Armour: #{@armour_rating}"
+        puts "Sword Level: #{@sword_skill}"
+        puts "Archery Level: #{@archery_skill}"
+        puts "Armour Rating: #{@armour_rating}"
     end
 
     def update_elf_stats
@@ -71,5 +73,9 @@ class Character
     def generate_archery_damage
         attack_damage = rand(30) + (@archery_skill * 2)
         attack_damage
+    end
+
+    def restore_health
+        @character_health = 100
     end
 end

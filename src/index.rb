@@ -3,6 +3,7 @@ require_relative('enemy')
 
 #Introduction
 def display_intro_message
+    system 'clear'
     puts ' '
     puts 'Welcome to the Adventure Game!!'
     puts ' '
@@ -18,11 +19,13 @@ end
 
 
 def select_character
-puts "Please select your character:"
-gets.downcase
+    puts ' '
+    puts "Please select your character:"
+    gets.downcase
 end
 
 def select_name
+    puts ' '
     puts "Please enter the name of your character:"
     name = gets.chomp
     puts ' '
@@ -31,6 +34,7 @@ def select_name
 end
 
 def explain_available_items
+    puts ' '
     puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
     puts "You have with you:"
     puts " - Sword"
@@ -54,28 +58,29 @@ def character_attack(enemy_health, damage)
     enemy_health
 end
 
-def enemy_attack(character_health, damage, enemy_attacks)
-    puts "The dragon attacked you with #{enemy_attacks.sample} and did #{damage} points of damage!"
+def enemy_attack(character_health, damage, enemy_attacks, enemy_type)
+    puts "The #{enemy_type} attacked you with #{enemy_attacks.sample} and did #{damage} points of damage!"
     character_health = character_health - damage
     character_health
 end
 
-def display_info(enemy_health, character_health)
+def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
     puts ' '
-    puts "Dragon Health: #{enemy_health}"
+    puts "#{enemy_type} Health: #{enemy_health}"
     puts "Your Health #{character_health}"
     puts ' '
     puts '--' * 20
 end
 
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
-enemy_attacks = ['breath fire', 'tail whip', 'slash']
+dragon_attacks = ['breath fire', 'tail whip', 'slash']
+goblin_attacks = ['scratch', 'throw spear', 'bite']
 
 display_intro_message
 
 character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
-dragon = Enemy.new('Dragon', 150, 8)
+enemy = Enemy.new('Dragon', 150, 8)
 
 
 select_character
@@ -85,26 +90,63 @@ explain_available_items
 
 
 #First Scene
-while dragon::enemy_health > 0 && character::character_health > 0
+
+while enemy::enemy_health > 0 && character::character_health > 0
     puts "Choose your action:"
     input = gets.chomp
     system 'clear'  
     puts ' '
     case input
     when "Use Sword"
-        dragon::enemy_health = character_attack(dragon::enemy_health, character.generate_sword_damage)
+        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
         puts ' '    
     when "Shoot Arrow"
-        dragon::enemy_health = character_attack(dragon::enemy_health, character.generate_archery_damage)
+        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
         puts ' '
     when "Search Area"
         character.search_area
     end
 
-    character::character_health = enemy_attack(character::character_health, dragon::generate_attack_damage - character::armour_rating, enemy_attacks)
+    character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type)
     puts ' '
-    display_info(dragon::enemy_health, character::character_health)
+    display_info(enemy::enemy_health, character::character_health, enemy::type)
 end
+
+
+if character::character_health > 0
+    puts 'You won!'
+else 
+    puts 'You lost!'
+end
+
+#Second Scene
+
+character.display_character_info
+enemy.update_goblin_stats
+character.restore_health
+character.display_character_info
+
+while enemy::enemy_health > 0 && character::character_health > 0
+    puts "Choose your action:"
+    input = gets.chomp
+    system 'clear'  
+    puts ' '
+    case input
+    when "Use Sword"
+        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_sword_damage)
+        puts ' '    
+    when "Shoot Arrow"
+        enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+        puts ' '
+    when "Search Area"
+        character.search_area
+    end
+
+    character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, goblin_attacks, enemy::type)
+    puts ' '
+    display_info(enemy::enemy_health, character::character_health, enemy::type)
+end
+
 
 if character::character_health > 0
     puts 'You won!'
