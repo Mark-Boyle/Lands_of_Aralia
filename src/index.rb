@@ -1,6 +1,6 @@
 require_relative('character')
 require_relative('enemy')
-require_relative('riddles')
+require_relative('riddles.rb')
 
 level = 1
 lives = 3
@@ -170,7 +170,12 @@ while level == 1 && lives > 0
     end
 end
 
-#Second Scene - Path 1 (Troll)
+
+puts "What path would you like to go down?"
+path = gets.chomp.to_i
+
+
+# #Second Scene - Path 1 (Troll)
 
 while level == 2 && lives > 0 && path == 1
     display_enemy_intro
@@ -214,9 +219,9 @@ while level == 2 && lives > 0 && path == 1
     end
 end
 
-#Second Scene - Path 2 (Orc)
+# #Second Scene - Path 2 (Orc)
 
-while level == 2 && lives > 0 && path == 1
+while level == 2 && lives > 0 && path == 2
     display_enemy_intro
     enemy.update_orc_stats
     character.restore_health(level)
@@ -262,13 +267,59 @@ end
 
 while level == 3 && lives > 0 && path == 1
     display_enemy_intro
-    run_riddle_scene
-    
+    guesses_remaining = 3
+    correct_answers = 0
+    while guesses_remaining > 0 && correct_answers < 3
+        riddle_selection = rand(1..2)
+        puts "Guesses remaining: #{guesses_remaining}"
+        puts "Correct answers: #{correct_answers}"
+        case riddle_selection
+        when 1 
+            puts "What has legs but can't walk?"
+            answer = gets.chomp.downcase.split
+            puts answer
+            if answer.include?('chair')
+                puts 'Correct!'
+                correct_answers += 1
+            elsif answer.include?('table')
+                puts 'Correct!'
+                correct_answers += 1
+            else 
+                puts 'Incorrect!'
+                guesses_remaining -= 1
+            end
+       
+        when 2 
+            puts "What goes away as soon as you talk about it?"
+            answer = gets.chomp.downcase.split
+            if answer.include?('silence')
+                puts 'Correct!'
+                correct_answers += 1
+            else 
+                puts 'Incorrect! The correct answer was silence.'
+                guesses_remaining -= 1
+            end
+        end
+        puts 'end of riddle'
+        puts "Guesses remaining: #{guesses_remaining}"
+        puts "Correct answers: #{correct_answers}"
+        gets
+    end
+
+    if guesses_remaining > 0
+    puts "Congratulations! You're solved the riddles!"
+        level += 1
+    else
+        puts 'You lost!'
+        lives -= 1
+        check_if_gameover(lives)
+        ask_to_retry_or_quit
+    end
 end
 
-#Third Scene (Dragon)
+#Fourth and Final Scene (Dragon)
 
-while level == 3 && lives > 0
+while level == 4 && lives > 0
     display_enemy_intro
     enemy.update_dragon_stats
     character.restore_health(level)

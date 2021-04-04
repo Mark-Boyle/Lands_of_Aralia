@@ -35,7 +35,4 @@ class Enemy
         @enemy_health = 160
         @attacking_force = 5
     end
-
-
-
 end
