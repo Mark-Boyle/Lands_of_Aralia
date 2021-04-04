@@ -12,7 +12,6 @@ class Character
     end
 
     def display_character_info
-        system 'clear'
         puts ' '
         puts "Character Information:"
         puts "Type: #{@character_type}"
@@ -25,8 +24,8 @@ class Character
     def update_elf_stats
         @character_type = 'Elf'
         @character_health = character_health
-        @sword_skill += 2
-        @archery_skill += 5
+        @sword_skill = 2
+        @archery_skill = 5
         @armour_rating = armour_rating
     end
 
@@ -47,14 +46,14 @@ class Character
     def find_extreme_health_potion
         puts @character_health
         puts "You found an Extreme Health Potion! Your health goes up by 30."
-        @character_health += 30
+        @character_health += 60
         puts "Your health is now at #{@character_health}"
     end
 
     def find_health_potion
         puts @character_health
         puts "You found a Health Potion! Your health goes up by 10."
-        @character_health += 10
+        @character_health += 30
         puts "Your health is now at #{@character_health}"
     end
 

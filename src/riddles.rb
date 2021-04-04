@@ -23,10 +23,7 @@ def run_riddle_scene
                 puts 'Incorrect!'
                 guesses_remaining -= 1
             end
-        # end
-
-        # riddle_selection = rand(1..6)
-        # case riddle_selection
+       
         when 2 
             puts "What goes away as soon as you talk about it?"
             answer = gets.chomp.downcase.split

@@ -1,6 +1,7 @@
 require_relative('character')
 require_relative('enemy')
 require_relative('riddles.rb')
+require_relative('storyline')
 
 level = 1
 lives = 3
@@ -33,6 +34,7 @@ def select_name
     puts ' '
     puts "Please enter the name of your character:"
     name = gets.chomp
+    system 'clear'
     puts ' '
     puts "Welcome #{name}!"
     name
@@ -78,15 +80,6 @@ def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
 end
 
-def display_enemy_intro
-    system 'clear'
-    puts ' '
-    puts "An enemy appears in front of you."
-    puts "It gives you an evil glare and a small smirk appears across it's face."
-    puts "It comes charging at you!"
-    puts ' '
-end
-
 def check_if_gameover(lives)
     if lives == 0
         gameover
@@ -107,12 +100,18 @@ def ask_to_retry_or_quit
     end
 end
 
+def confirm_character_choice
+    puts ' '
+    puts 'Are you happy with this choice? (y/n)'
+end
+
 
 
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 dragon_attacks = ['breath fire', 'tail whip', 'slash']
 goblin_attacks = ['scratch', 'throw spear', 'bite']
 troll_attacks = ['swing club', 'punch', 'stomp']
+orc_attacks = ['sword attack', 'dagger attack', 'charge']
 
 display_intro_message
 
@@ -120,16 +119,25 @@ character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
 enemy = Enemy.new('Dragon', 150, 8)
 
 
-select_character
-character.update_elf_stats
-character.display_character_info
+character_choice = 'n'
+
+while character_choice == 'n'
+    system 'clear'
+    select_character
+    character.update_elf_stats
+    character.display_character_info
+    confirm_character_choice
+    character_choice = gets.chomp.downcase
+end
+
+    system 'clear'
 explain_available_items
 
 
 #First Scene (Goblin)
 
 while level == 1 && lives > 0
-    display_enemy_intro
+    display_goblin_intro
     enemy.update_goblin_stats
     character.restore_health(level)
 
@@ -170,15 +178,17 @@ while level == 1 && lives > 0
     end
 end
 
-
+system 'clear'
+display_first_path_choice
+puts ' '
 puts "What path would you like to go down?"
 path = gets.chomp.to_i
 
 
-# #Second Scene - Path 1 (Troll)
+#Second Scene - Path 1 (Troll)
 
 while level == 2 && lives > 0 && path == 1
-    display_enemy_intro
+    display_troll_intro
     enemy.update_troll_stats
     character.restore_health(level)
     
@@ -222,7 +232,7 @@ end
 # #Second Scene - Path 2 (Orc)
 
 while level == 2 && lives > 0 && path == 2
-    display_enemy_intro
+    display_orc_intro
     enemy.update_orc_stats
     character.restore_health(level)
     
@@ -255,6 +265,7 @@ while level == 2 && lives > 0 && path == 2
         puts '<Press Enter to Continue>'
         gets
         level += 1
+        path = 1
     else 
         puts 'You lost!'
         lives -= 1
@@ -266,11 +277,11 @@ end
 #Third Scene - Path 1 (Witch)
 
 while level == 3 && lives > 0 && path == 1
-    display_enemy_intro
+    display_witch_intro
     guesses_remaining = 3
     correct_answers = 0
     while guesses_remaining > 0 && correct_answers < 3
-        riddle_selection = rand(1..2)
+        riddle_selection = rand(1..4)
         puts "Guesses remaining: #{guesses_remaining}"
         puts "Correct answers: #{correct_answers}"
         case riddle_selection
@@ -299,6 +310,28 @@ while level == 3 && lives > 0 && path == 1
                 puts 'Incorrect! The correct answer was silence.'
                 guesses_remaining -= 1
             end
+
+        when 3 
+            puts "What has a bank but no money?"
+            answer = gets.chomp.downcase.split
+            if answer.include?('river')
+                puts 'Correct!'
+                correct_answers += 1
+            else 
+                puts 'Incorrect! The correct answer was river.'
+                guesses_remaining -= 1
+            end
+
+        when 4 
+            puts "It has keys, but no locks. \nIt has space, but no room. \nYou can enter, but you can't go inside.\nWhat is it?"
+            answer = gets.chomp.downcase.split
+            if answer.include?('keyboard')
+                puts 'Correct!'
+                correct_answers += 1
+            else 
+                puts 'Incorrect! The correct answer was a keyboard.'
+                guesses_remaining -= 1
+            end
         end
         puts 'end of riddle'
         puts "Guesses remaining: #{guesses_remaining}"
@@ -320,7 +353,7 @@ end
 #Fourth and Final Scene (Dragon)
 
 while level == 4 && lives > 0
-    display_enemy_intro
+    display_dragon_intro
     enemy.update_dragon_stats
     character.restore_health(level)
     
