@@ -3,6 +3,8 @@ require_relative('enemy')
 require_relative('storyline')
 require 'tty-prompt'
 require 'artii'
+require 'colorized_string'
+require 'colorize'
 
 prompt = TTY::Prompt.new
 
@@ -18,13 +20,14 @@ def display_intro_message
     puts a.asciify('Lands of Aralia!')
     puts 'Welcome to the Lands of Aralia!!'
     puts ' '
-    puts 'The Lands of Aralia are a beautiful yet dangerous place.'
-    puts "Tales of the legendary Ruby Gemstone have lured many\ntreasure hunters into these lands."
+    puts "The Lands of Aralia are a beautiful yet dangerous place."
+    puts "Tales of the Legendary Ruby Gemstone have lured many\ntreasure hunters into these lands."
     puts ' '
     puts 'It is a dangerous path filled with many challenges to overcome.'
     puts "But it is said that this Ruby Gemstone is more beautiful than the \nmind can comprehend."
     puts ' '
     puts "One brave, adventurous soul has set out on a quest\nto find it!"
+    puts String.color_samples
 end
 
 
@@ -56,9 +59,9 @@ def explain_available_items
     puts " - Armour"
     puts ' '
     puts "Throughout the land you may be lucky enough to find:"
-    puts " - Health Potions"
-    puts " - Extreme Health Potions"
-    puts " - Improved Armour"
+    puts " - Health Potions".colorize(:light_red).bold
+    puts " - Extreme Health Potions".colorize(:magenta).bold
+    puts " - Improved Armour".colorize(:blue).bold
     puts ' '
     puts "You're all set to begin your adventure!"
     puts ' '
@@ -67,7 +70,9 @@ def explain_available_items
 end
 
 def character_attack(enemy_health, damage)
-    puts "You delivered #{damage} points of damage!"
+    print "You delivered " 
+    print "#{damage}".colorize(:white) 
+    print " points of damage!"
     enemy_health = enemy_health - damage
     enemy_health
 end
@@ -107,10 +112,6 @@ def ask_to_retry_or_quit
     end
 end
 
-def confirm_character_choice
-    puts ' '
-    puts 'Are you happy with this choice? (y/n)'
-end
 
 
 
@@ -126,9 +127,9 @@ character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
 enemy = Enemy.new('Dragon', 150, 8)
 
 
-character_confirmation = 'n'
+character_confirmation = 'No'
 
-while character_confirmation == 'n'
+while character_confirmation == 'No'
     system 'clear'
     character_choice = select_character(prompt)
     case character_choice
@@ -140,8 +141,11 @@ while character_confirmation == 'n'
         character.update_warrior_stats
     end
     character.display_character_info
-    confirm_character_choice
-    character_confirmation = gets.chomp.downcase
+    puts ' '
+    character_confirmation = prompt.select('Are you happy with this choice?') do |menu|
+        menu.choice "Yes"
+        menu.choice "No"
+      end
 end
 
     system 'clear'
@@ -200,8 +204,10 @@ end
 system 'clear'
 display_first_path_choice
 puts ' '
-puts "What path would you like to go down?"
-path = gets.chomp.to_i
+path = prompt.select("What path would you like to go down?") do |menu|
+    menu.choice "Snowy Mountains", 1
+    menu.choice "Valley", 2
+  end
 
 
 #Second Scene - Path 1 (Troll)
