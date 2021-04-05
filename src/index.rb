@@ -2,6 +2,9 @@ require_relative('character')
 require_relative('enemy')
 require_relative('riddles.rb')
 require_relative('storyline')
+require 'tty-prompt'
+
+prompt = TTY::Prompt.new
 
 level = 1
 lives = 3
@@ -142,8 +145,13 @@ while level == 1 && lives > 0
     character.restore_health(level)
 
     while enemy::enemy_health > 0 && character::character_health > 0
-        puts "Choose your action:"
-        input = gets.chomp
+       
+        input = prompt.select("Choose your action:") do |menu|
+            menu.choice "Use Sword"
+            menu.choice "Shoot Arrow"
+            menu.choice "Search Area"
+          end
+        
         system 'clear'  
         puts ' '
         case input
@@ -194,8 +202,11 @@ while level == 2 && lives > 0 && path == 1
     
 
     while enemy::enemy_health > 0 && character::character_health > 0
-        puts "Choose your action:"
-        input = gets.chomp
+        input = prompt.select("Choose your action:") do |menu|
+            menu.choice "Use Sword"
+            menu.choice "Shoot Arrow"
+            menu.choice "Search Area"
+          end
         system 'clear'  
         puts ' '
         case input
@@ -238,8 +249,11 @@ while level == 2 && lives > 0 && path == 2
     
 
     while enemy::enemy_health > 0 && character::character_health > 0
-        puts "Choose your action:"
-        input = gets.chomp
+        input = prompt.select("Choose your action:") do |menu|
+            menu.choice "Use Sword"
+            menu.choice "Shoot Arrow"
+            menu.choice "Search Area"
+          end
         system 'clear'  
         puts ' '
         case input
@@ -359,8 +373,11 @@ while level == 4 && lives > 0
     
 
     while enemy::enemy_health > 0 && character::character_health > 0
-        puts "Choose your action:"
-        input = gets.chomp
+        input = prompt.select("Choose your action:") do |menu|
+            menu.choice "Use Sword"
+            menu.choice "Shoot Arrow"
+            menu.choice "Search Area"
+          end
         system 'clear'  
         puts ' '
         case input
