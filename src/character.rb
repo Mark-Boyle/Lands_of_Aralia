@@ -60,24 +60,24 @@ class Character
     end
 
     def find_extreme_health_potion
-        puts @character_health
-        puts "You found an Extreme Health Potion! Your health goes up by 30."
-        @character_health += 60
+        puts "You found an Extreme Health Potion! Your health goes up by 50."
+        @character_health += 50
         puts "Your health is now at #{@character_health}"
+        puts ' '
     end
 
     def find_health_potion
-        puts @character_health
-        puts "You found a Health Potion! Your health goes up by 10."
-        @character_health += 30
+        puts "You found a Health Potion! Your health goes up by 25."
+        @character_health += 25
         puts "Your health is now at #{@character_health}"
+        puts ' '
     end
 
     def find_improved_armour
-        puts @armour_rating
         puts "You found some better armour! Your armour rating goes up by 5."
         @armour_rating += 5
         puts "Your new armour rating is #{@armour_rating}"
+        puts ' '
     end
 
     def generate_sword_damage

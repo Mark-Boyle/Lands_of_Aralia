@@ -1,6 +1,7 @@
 require_relative('character')
 require_relative('enemy')
 require_relative('storyline')
+require_relative('errors')
 require 'tty-prompt'
 require 'artii'
 require 'colorized_string'
@@ -27,7 +28,7 @@ def display_intro_message
     puts "But it is said that this Ruby Gemstone is more beautiful than the \nmind can comprehend."
     puts ' '
     puts "One brave, adventurous soul has set out on a quest\nto find it!"
-    puts String.color_samples
+    # puts String.color_samples
 end
 
 
@@ -87,7 +88,7 @@ def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
     puts ' '
     puts "#{enemy_type} Health: #{enemy_health}"
-    puts "Your Health #{character_health}"
+    puts "Your Health: #{character_health}"
     puts ' '
     puts '--' * 20
 end
@@ -308,18 +309,20 @@ end
 #Third Scene - Path 1 (Witch)
 
 while level == 3 && lives > 0 && path == 1
+    system 'clear'
     display_witch_intro
-    guesses_remaining = 3
+    incorrect_answers = 0
     correct_answers = 0
-    while guesses_remaining > 0 && correct_answers < 3
+    while incorrect_answers < 3 && correct_answers < 3
+        puts ' '
+        puts "Next Riddle:\n\n" unless incorrect_answers == 0 && correct_answers == 0
         riddle_selection = rand(1..4)
-        puts "Guesses remaining: #{guesses_remaining}"
-        puts "Correct answers: #{correct_answers}"
         case riddle_selection
         when 1 
             puts "What has legs but can't walk?"
             answer = gets.chomp.downcase.split
             puts answer
+            puts ' '
             if answer.include?('chair')
                 puts 'Correct!'
                 correct_answers += 1
@@ -328,49 +331,55 @@ while level == 3 && lives > 0 && path == 1
                 correct_answers += 1
             else 
                 puts 'Incorrect!'
-                guesses_remaining -= 1
+                incorrect_answers += 1
             end
        
         when 2 
             puts "What goes away as soon as you talk about it?"
             answer = gets.chomp.downcase.split
+            puts ' '
             if answer.include?('silence')
                 puts 'Correct!'
                 correct_answers += 1
             else 
                 puts 'Incorrect! The correct answer was silence.'
-                guesses_remaining -= 1
+                incorrect_answers += 1
             end
 
         when 3 
             puts "What has a bank but no money?"
             answer = gets.chomp.downcase.split
+            puts ' '
             if answer.include?('river')
                 puts 'Correct!'
                 correct_answers += 1
             else 
                 puts 'Incorrect! The correct answer was river.'
-                guesses_remaining -= 1
+                incorrect_answers += 1
             end
 
         when 4 
             puts "It has keys, but no locks. \nIt has space, but no room. \nYou can enter, but you can't go inside.\nWhat is it?"
             answer = gets.chomp.downcase.split
+            puts ' '
             if answer.include?('keyboard')
                 puts 'Correct!'
                 correct_answers += 1
             else 
                 puts 'Incorrect! The correct answer was a keyboard.'
-                guesses_remaining -= 1
+                incorrect_answers += 1
             end
         end
-        puts 'end of riddle'
-        puts "Guesses remaining: #{guesses_remaining}"
+        puts ' '
         puts "Correct answers: #{correct_answers}"
+        puts "Incorrect answers: #{incorrect_answers}"
+        puts ' '
+        puts '<Press Enter to Continue>'
         gets
+        system 'clear' unless incorrect_answers == 3 || correct_answers == 3
     end
 
-    if guesses_remaining > 0
+    if correct_answers == 3
     puts "Congratulations! You're solved the riddles!"
         level += 1
     else
@@ -379,6 +388,7 @@ while level == 3 && lives > 0 && path == 1
         check_if_gameover(lives)
         ask_to_retry_or_quit
     end
+    system 'clear'
 end
 
 #Fourth and Final Scene (Dragon)
