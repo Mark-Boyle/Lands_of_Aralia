@@ -26,7 +26,23 @@ class Character
         @character_health = character_health
         @sword_skill = 2
         @archery_skill = 5
-        @armour_rating = armour_rating
+        @armour_rating = 2
+    end
+
+    def update_dwarf_stats
+        @character_type = 'Dwarf'
+        @character_health = character_health
+        @sword_skill = 4
+        @archery_skill = 1
+        @armour_rating = 4
+    end
+
+    def update_warrior_stats
+        @character_type = 'Warrior'
+        @character_health = character_health
+        @sword_skill = 3
+        @archery_skill = 3
+        @armour_rating = 3
     end
 
     def search_area

@@ -1,4 +1,4 @@
-require_relative('index')
+# require_relative('index')
 
 
 def run_riddle_scene

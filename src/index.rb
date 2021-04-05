@@ -1,8 +1,8 @@
 require_relative('character')
 require_relative('enemy')
-require_relative('riddles.rb')
 require_relative('storyline')
 require 'tty-prompt'
+require 'artii'
 
 prompt = TTY::Prompt.new
 
@@ -14,23 +14,27 @@ path = 1
 def display_intro_message
     system 'clear'
     puts ' '
-    puts 'Welcome to the Adventure Game!!'
+    a = Artii::Base.new
+    puts a.asciify('Lands of Aralia!')
+    puts 'Welcome to the Lands of Aralia!!'
     puts ' '
-    puts 'The Lands of Azalia are a beautiful yet dangerous place.'
+    puts 'The Lands of Aralia are a beautiful yet dangerous place.'
     puts "Tales of the legendary Ruby Gemstone have lured many\ntreasure hunters into these lands."
     puts ' '
     puts 'It is a dangerous path filled with many challenges to overcome.'
     puts "But it is said that this Ruby Gemstone is more beautiful than the \nmind can comprehend."
     puts ' '
     puts "One brave, adventurous soul has set out on a quest\nto find it!"
-    puts ' '
 end
 
 
-def select_character
+def select_character(prompt)
     puts ' '
-    puts "Please select your character:"
-    gets.downcase
+    prompt.select("Please Select Your Character Type:") do |menu|
+        menu.choice "Elf", 1
+        menu.choice "Dwarf", 2
+        menu.choice "Warrior", 3
+      end
 end
 
 def select_name
@@ -91,7 +95,7 @@ end
 
 def gameover
     puts 'You fought bravely, but unfortunately you have run out of lives.'
-    puts 'Better Luck next time!'
+    puts 'Better luck next time!'
     exit
 end
 
@@ -122,15 +126,22 @@ character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
 enemy = Enemy.new('Dragon', 150, 8)
 
 
-character_choice = 'n'
+character_confirmation = 'n'
 
-while character_choice == 'n'
+while character_confirmation == 'n'
     system 'clear'
-    select_character
-    character.update_elf_stats
+    character_choice = select_character(prompt)
+    case character_choice
+    when 1 
+        character.update_elf_stats
+    when 2 
+        character.update_dwarf_stats
+    when 3
+        character.update_warrior_stats
+    end
     character.display_character_info
     confirm_character_choice
-    character_choice = gets.chomp.downcase
+    character_confirmation = gets.chomp.downcase
 end
 
     system 'clear'
