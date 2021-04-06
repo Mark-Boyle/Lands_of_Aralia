@@ -376,10 +376,16 @@ while level == 3 && lives > 0 && path == 1
     display_witch_intro
     incorrect_answers = 0
     correct_answers = 0
+    riddle_number = [1, 2, 3, 4, 5, 6]
     while incorrect_answers < 3 && correct_answers < 3
         puts ' '
         puts "Next Riddle:\n\n" unless incorrect_answers == 0 && correct_answers == 0
-        riddle_selection = rand(1..4)
+        
+        riddle_selection = riddle_number.sample
+        puts riddle_selection
+        riddle_number.delete(riddle_selection)
+        puts "array:"
+        puts riddle_number
         case riddle_selection
         when 1 
             puts "What has legs but can't walk?"
@@ -432,6 +438,28 @@ while level == 3 && lives > 0 && path == 1
                 puts 'Incorrect! The correct answer was a keyboard.'
                 incorrect_answers += 1
             end
+        when 5
+            puts "What has a head and a tail, but no body?"
+            answer = gets.chomp.downcase.split
+            puts ' '
+            if answer.include?('coin')
+                puts 'Correct!'
+                correct_answers += 1
+            else 
+                puts 'Incorrect! The correct answer was coin.'
+                incorrect_answers += 1
+            end
+        when 6 
+            puts "What goes up but never comes down?"
+            answer = gets.chomp.downcase.split
+            puts ' '
+            if answer.include?('age')
+                puts 'Correct!'
+                correct_answers += 1
+            else 
+                puts 'Incorrect! The correct answer was age.'
+                incorrect_answers += 1
+            end
         end
         puts ' '
         puts "Correct answers: #{correct_answers}"
@@ -447,6 +475,7 @@ while level == 3 && lives > 0 && path == 1
         level += 1
     else
         puts 'You lost!'
+        riddle_number = [1, 2, 3, 4, 5, 6]
         lives -= 1
         check_if_gameover(lives)
         ask_to_retry_or_quit
