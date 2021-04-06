@@ -1,11 +1,11 @@
 require_relative('character')
 require_relative('enemy')
 require_relative('storyline')
-require_relative('errors')
 require 'tty-prompt'
 require 'artii'
 require 'colorized_string'
 require 'colorize'
+require 'rspec'
 
 prompt = TTY::Prompt.new
 
