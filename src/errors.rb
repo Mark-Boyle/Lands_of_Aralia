@@ -1,8 +1,3 @@
-class Test
-
-
-    def number
-        5
-    end
-
+class HealthBelowZeroError < StandardError 
+   
 end

@@ -15,30 +15,15 @@ lives = 3
 path = 1
 
 #Introduction
-def display_intro_message
-    system 'clear'
-    puts ' '
-    a = Artii::Base.new
-    puts a.asciify('Lands of Aralia!')
-    puts 'Welcome to the Lands of Aralia!!'
-    puts ' '
-    puts "The Lands of Aralia are a beautiful yet dangerous place."
-    puts "Tales of the Legendary Ruby Gemstone have lured many\ntreasure hunters into these lands."
-    puts ' '
-    puts 'It is a dangerous path filled with many challenges to overcome.'
-    puts "But it is said that this Ruby Gemstone is more beautiful than the \nmind can comprehend."
-    puts ' '
-    puts "One brave, adventurous soul has set out on a quest\nto find it!"
-    # puts String.color_samples
-end
+
 
 
 def select_character(prompt)
     puts ' '
-    prompt.select("Please Select Your Character Type:") do |menu|
-        menu.choice "Elf", 1
-        menu.choice "Dwarf", 2
-        menu.choice "Warrior", 3
+    prompt.select('Please Select Your Character Type:') do |menu|
+        menu.choice 'Elf'
+        menu.choice 'Dwarf'
+        menu.choice 'Warrior'
       end
 end
 
@@ -52,25 +37,6 @@ def select_name
     name
 end
 
-def explain_available_items
-    puts ' '
-    puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
-    puts "You have with you:"
-    puts " - Sword"
-    puts " - Bow and Arrows"
-    puts " - Armour"
-    puts ' '
-    puts "Throughout the land you may be lucky enough to find:"
-    puts " - Health Potions".colorize(:light_red).bold
-    puts " - Extreme Health Potions".colorize(:magenta).bold
-    puts " - Improved Armour".colorize(:blue).bold
-    puts ' '
-    puts "You're all set to begin your adventure!"
-    puts ' '
-    puts "<Press Enter to begin>"
-    gets
-end
-
 def character_attack(enemy_health, damage)
     print "You delivered " 
     print "#{damage}".colorize(:white) 
@@ -80,7 +46,11 @@ def character_attack(enemy_health, damage)
 end
 
 def enemy_attack(character_health, damage, enemy_attacks, enemy_type)
-    puts "The #{enemy_type} attacked you with #{enemy_attacks.sample} and did #{damage} points of damage!"
+    print "The #{enemy_type} attacked you with " 
+    print "#{enemy_attacks.sample}".colorize(:cyan)
+    print " and did "
+    print "#{damage}".colorize(:white)
+    print " points of damage!"
     character_health = character_health - damage
     character_health
 end
@@ -88,8 +58,10 @@ end
 def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
     puts ' '
-    puts "#{enemy_type} Health: #{enemy_health}"
-    puts "Your Health: #{character_health}"
+    print "#{enemy_type} Health: "
+    print "#{enemy_health}\n".colorize(:white)
+    print "Your Health: "
+    print "#{character_health}".colorize(:white)
     puts ' '
     puts '--' * 20
 end
@@ -114,9 +86,6 @@ def ask_to_retry_or_quit
     end
 end
 
-
-
-
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 dragon_attacks = ['breath fire', 'tail whip', 'slash']
 goblin_attacks = ['scratch', 'throw spear', 'bite']
@@ -128,18 +97,17 @@ display_intro_message
 character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
 enemy = Enemy.new('Dragon', 150, 8)
 
-
 character_confirmation = 'No'
 
 while character_confirmation == 'No'
     system 'clear'
     character_choice = select_character(prompt)
     case character_choice
-    when 1 
+    when 'Elf' 
         character.update_elf_stats
-    when 2 
+    when 'Dwarf' 
         character.update_dwarf_stats
-    when 3
+    when 'Warrior'
         character.update_warrior_stats
     end
     character.display_character_info
@@ -192,7 +160,7 @@ while level == 1 && lives > 0
 
         begin
             raise HealthBelowZeroError if enemy::enemy_health < 0
-            rescue
+        rescue
             enemy::enemy_health = 0
         end
 
@@ -202,7 +170,7 @@ while level == 1 && lives > 0
         
         begin
             raise HealthBelowZeroError if character::character_health < 0
-            rescue
+        rescue
             character::character_health = 0
         end
         
@@ -239,7 +207,6 @@ while level == 2 && lives > 0 && path == 1
     display_troll_intro
     enemy.update_troll_stats
     character.restore_health(level)
-    
 
     while enemy::enemy_health > 0 && character::character_health > 0
         input = prompt.select("Choose your action:") do |menu|
@@ -424,7 +391,7 @@ while level == 3 && lives > 0 && path == 1
                 incorrect_answers += 1
             end
 
-        when 4 
+        when 4
             puts "It has keys, but no locks. \nIt has space, but no room. \nYou can enter, but you can't go inside.\nWhat is it?"
             answer = gets.chomp.downcase.split
             puts ' '

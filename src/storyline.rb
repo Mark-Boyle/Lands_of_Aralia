@@ -1,3 +1,42 @@
+require 'artii'
+require 'colorize'
+
+def display_intro_message
+    system 'clear'
+    puts ' '
+    a = Artii::Base.new
+    puts a.asciify('Lands of Aralia!')
+    puts 'Welcome to the Lands of Aralia!!'
+    puts ' '
+    puts "The Lands of Aralia are a beautiful yet dangerous place."
+    puts "Tales of the Legendary Ruby Gemstone have lured many\ntreasure hunters into these lands."
+    puts ' '
+    puts 'It is a dangerous path filled with many challenges to overcome.'
+    puts "But it is said that this Ruby Gemstone is more beautiful than the \nmind can comprehend."
+    puts ' '
+    puts "One brave, adventurous soul has set out on a quest\nto find it!"
+    # puts String.color_samples  
+end
+
+def explain_available_items
+    puts ' '
+    puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
+    puts "You have with you:"
+    puts " - Sword".colorize(:blue).bold
+    puts " - Bow and Arrows".colorize(:blue).bold
+    puts " - Armour".colorize(:blue).bold
+    puts ' '
+    puts "Throughout the land you may be lucky enough to find:"
+    puts " - Health Potions".colorize(:blue).bold
+    puts " - Extreme Health Potions".colorize(:blue).bold
+    puts " - Improved Armour".colorize(:blue).bold
+    puts ' '
+    puts "You're all set to begin your adventure!"
+    puts ' '
+    puts "<Press Enter to begin>"
+    gets
+end
+
 def display_enemy_intro
     system 'clear'
     puts ' '
@@ -14,7 +53,7 @@ def display_goblin_intro
     puts 'Eager to explore the new lands you power forward full of energy.'
     puts ' '
     puts "Suddenly a Goblin jumps out in front of you!"
-    puts "Waving it's arms about wildly, and you can see \nit's sharp teeth through it's evil grin."
+    puts "Waving it's arms about wildly, you can see \nit's sharp teeth through it's evil grin."
     puts ' '
     puts "It comes charging at you ready for a fight!"
     puts ' '
@@ -49,7 +88,7 @@ def display_dragon_intro
     puts "You enter the cave where the Ruby Gemstone is located."
     puts "With brave courage you venture deep into the cave."
     puts ' '
-    puts "The cave opens up into a large cavern with natural light \n shining down from high above"
+    puts "The cave opens up into a large cavern with natural light \nshining down from high above."
     puts ' '
     puts "In the middle of the cavern lies a sleeping dragon."
     puts 'You see the Legendary Ruby Gemstone behind the dragon and feel a jolt of excitement!'
