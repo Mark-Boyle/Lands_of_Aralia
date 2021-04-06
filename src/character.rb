@@ -87,6 +87,16 @@ class Character
         attack_damage
     end
 
+    def generate_spear_damage
+        attack_damage = rand(10..40)
+        attack_damage
+    end
+
+    def generate_battleaxe_damage
+        attack_damage = rand(15..45)
+        attack_damage
+    end
+
     def restore_health(level)
         @character_health = 100 + (level * 10)
     end

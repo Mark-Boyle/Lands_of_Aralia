@@ -14,7 +14,7 @@ def display_goblin_intro
     puts 'Eager to explore the new lands you power forward full of energy.'
     puts ' '
     puts "Suddenly a Goblin jumps out in front of you!"
-    puts "Waving it's arms about wildly, and you can see it's sharp teeth through it's evil grin."
+    puts "Waving it's arms about wildly, and you can see \nit's sharp teeth through it's evil grin."
     puts ' '
     puts "It comes charging at you ready for a fight!"
     puts ' '
@@ -51,14 +51,12 @@ end
 
 def display_witch_intro
     puts ' '
-    puts "As you walk along the river you notice a figure in the distance."
-    puts 'As you get closer you see that it is an old witch waiting for you.'
-    puts ' '
+    puts "As you walk along the river you notice an old witch waiting for you in the distance."
     puts 'When you get close by, her eyes suddenly fly open and give you a deathly stare!'
-    puts "'You shall not pass until you solve 3 riddles' she says."
-    puts "'But think wisely, because 3 wrong answers will cause a terrible spell to fall upon you.'"
     puts ' '
-    puts 'You prepare yourself to think hard.'
+    puts "'You shall not pass until you solve 3 riddles' she says."
+    puts "'But think wisely, because 3 wrong answers will cause a \nterrible spell to fall upon you.'"
+    puts ' '
     puts "The witch raises her hand and says 'The first riddle is:'"
     puts ' '
 end
@@ -71,6 +69,8 @@ end
 def display_first_path_choice
     puts ' '
     puts "You've come to a fork in the road."
+    puts ' '
     puts "One direction leads you over the Snowy Mountains."
+    puts ' '
     puts "The other takes you down the valley."
 end

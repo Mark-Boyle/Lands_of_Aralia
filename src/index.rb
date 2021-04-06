@@ -166,6 +166,8 @@ while level == 1 && lives > 0
             menu.choice "Use Sword"
             menu.choice "Shoot Arrow"
             menu.choice "Search Area"
+            if level > 1 then menu.choice "Throw Spear" end
+            if level > 2 then menu.choice "Swing Battleaxe" end
           end
         
         system 'clear'  
@@ -177,6 +179,12 @@ while level == 1 && lives > 0
         when "Shoot Arrow"
             enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
             puts ' '
+        when "Throw Spear"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_spear_damage)
+            puts ' '
+        when "Swing Battleaxe"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_battleaxe_damage)
+            puts ' '
         when "Search Area"
             character.search_area
         end
@@ -185,8 +193,6 @@ while level == 1 && lives > 0
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
-
-
 
     if character::character_health > 0
         puts "Congratulations! You defeated the #{enemy::type}!"
@@ -224,6 +230,8 @@ while level == 2 && lives > 0 && path == 1
             menu.choice "Use Sword"
             menu.choice "Shoot Arrow"
             menu.choice "Search Area"
+            if level > 1 then menu.choice "Throw Spear" end
+            if level > 2 then menu.choice "Swing Battleaxe" end
           end
         system 'clear'  
         puts ' '
@@ -233,6 +241,12 @@ while level == 2 && lives > 0 && path == 1
             puts ' '    
         when "Shoot Arrow"
             enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Throw Spear"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_spear_damage)
+            puts ' '
+        when "Swing Battleaxe"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_battleaxe_damage)
             puts ' '
         when "Search Area"
             character.search_area
@@ -271,6 +285,8 @@ while level == 2 && lives > 0 && path == 2
             menu.choice "Use Sword"
             menu.choice "Shoot Arrow"
             menu.choice "Search Area"
+            if level > 1 then menu.choice "Throw Spear" end
+            if level > 2 then menu.choice "Swing Battleaxe" end
           end
         system 'clear'  
         puts ' '
@@ -280,6 +296,12 @@ while level == 2 && lives > 0 && path == 2
             puts ' '    
         when "Shoot Arrow"
             enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Throw Spear"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_spear_damage)
+            puts ' '
+        when "Swing Battleaxe"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_battleaxe_damage)
             puts ' '
         when "Search Area"
             character.search_area
@@ -404,6 +426,8 @@ while level == 4 && lives > 0
             menu.choice "Use Sword"
             menu.choice "Shoot Arrow"
             menu.choice "Search Area"
+            if level > 1 then menu.choice "Throw Spear" end
+            if level > 2 then menu.choice "Swing Battleaxe" end
           end
         system 'clear'  
         puts ' '
@@ -413,6 +437,12 @@ while level == 4 && lives > 0
             puts ' '    
         when "Shoot Arrow"
             enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_archery_damage)
+            puts ' '
+        when "Throw Spear"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_spear_damage)
+            puts ' '
+        when "Swing Battleaxe"
+            enemy::enemy_health = character_attack(enemy::enemy_health, character.generate_battleaxe_damage)
             puts ' '
         when "Search Area"
             character.search_area
