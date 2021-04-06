@@ -1,6 +1,7 @@
 require_relative('character')
 require_relative('enemy')
 require_relative('storyline')
+require_relative('errors')
 require 'tty-prompt'
 require 'artii'
 require 'colorized_string'
@@ -189,7 +190,22 @@ while level == 1 && lives > 0
             character.search_area
         end
 
+        begin
+            raise HealthBelowZeroError if enemy::enemy_health < 0
+            rescue
+            enemy::enemy_health = 0
+        end
+
+        
+
         if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, goblin_attacks, enemy::type) end
+        
+        begin
+            raise HealthBelowZeroError if character::character_health < 0
+            rescue
+            character::character_health = 0
+        end
+        
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
@@ -252,7 +268,20 @@ while level == 2 && lives > 0 && path == 1
             character.search_area
         end
 
+        begin
+            raise HealthBelowZeroError if enemy::enemy_health < 0
+            rescue
+            enemy::enemy_health = 0
+        end
+
         if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, troll_attacks, enemy::type) end
+        
+        begin
+            raise HealthBelowZeroError if character::character_health < 0
+            rescue
+            character::character_health = 0
+        end
+
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
@@ -307,7 +336,19 @@ while level == 2 && lives > 0 && path == 2
             character.search_area
         end
 
+        begin
+            raise HealthBelowZeroError if enemy::enemy_health < 0
+            rescue
+            enemy::enemy_health = 0
+        end
+
         if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, orc_attacks, enemy::type) end
+        
+        begin
+            raise HealthBelowZeroError if character::character_health < 0
+            rescue
+            character::character_health = 0
+        end
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
@@ -448,7 +489,20 @@ while level == 4 && lives > 0
             character.search_area
         end
 
+        begin
+            raise HealthBelowZeroError if enemy::enemy_health < 0
+            rescue
+            enemy::enemy_health = 0
+        end
+
         if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, dragon_attacks, enemy::type) end
+
+        begin
+            raise HealthBelowZeroError if character::character_health < 0
+            rescue
+            character::character_health = 0
+        end
+
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
