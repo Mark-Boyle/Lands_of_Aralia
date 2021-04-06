@@ -382,10 +382,7 @@ while level == 3 && lives > 0 && path == 1
         puts "Next Riddle:\n\n" unless incorrect_answers == 0 && correct_answers == 0
         
         riddle_selection = riddle_number.sample
-        puts riddle_selection
         riddle_number.delete(riddle_selection)
-        puts "array:"
-        puts riddle_number
         case riddle_selection
         when 1 
             puts "What has legs but can't walk?"

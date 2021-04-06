@@ -46,7 +46,19 @@ end
 
 def display_dragon_intro
     puts ' '
-    puts "**Dragon Intro**"
+    puts "You enter the cave where the Ruby Gemstone is located."
+    puts "With brave courage you venture deep into the cave."
+    puts ' '
+    puts "The cave opens up into a large cavern with natural light \n shining down from high above"
+    puts ' '
+    puts "In the middle of the cavern lies a sleeping dragon."
+    puts 'You see the Legendary Ruby Gemstone behind the dragon and feel a jolt of excitement!'
+    puts ' '
+    puts "As you try to sneak past, the dragon opens its eyes, raises its head \nand breaths fire in your direction!"
+    puts "You manage to hide behind a rock but you realise the battle has begun!!"
+    puts ' '
+
+
 end
 
 def display_witch_intro
