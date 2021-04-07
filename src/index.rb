@@ -15,9 +15,6 @@ lives = 3
 path = 1
 
 #Introduction
-
-
-
 def select_character(prompt)
     puts ' '
     prompt.select('Please Select Your Character Type:') do |menu|
@@ -61,7 +58,7 @@ def display_info(enemy_health, character_health, enemy_type)
     print "#{enemy_type} Health: "
     print "#{enemy_health}\n".colorize(:white)
     print "Your Health: "
-    print "#{character_health}".colorize(:white)
+    print "#{character_health}\n".colorize(:white)
     puts ' '
     puts '--' * 20
 end
@@ -336,6 +333,14 @@ while level == 2 && lives > 0 && path == 2
     end
 end
 
+system 'clear'
+display_second_path_choice
+puts ' '
+path = prompt.select("What path would you like to go down?") do |menu|
+    menu.choice "River", 1
+    menu.choice "Forest", 2
+  end
+
 #Third Scene - Path 1 (Witch)
 
 while level == 3 && lives > 0 && path == 1
@@ -352,76 +357,100 @@ while level == 3 && lives > 0 && path == 1
         riddle_number.delete(riddle_selection)
         case riddle_selection
         when 1 
+            puts '--' * 20
             puts "What has legs but can't walk?"
+            puts '--' * 20
             answer = gets.chomp.downcase.split
             puts answer
             puts ' '
             if answer.include?('chair')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             elsif answer.include?('table')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
-                puts 'Incorrect!'
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was chair or table.'
                 incorrect_answers += 1
             end
        
         when 2 
+            puts '--' * 20
             puts "What goes away as soon as you talk about it?"
+            puts '--' * 20
             answer = gets.chomp.downcase.split
             puts ' '
             if answer.include?('silence')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
-                puts 'Incorrect! The correct answer was silence.'
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was silence.'
                 incorrect_answers += 1
             end
 
         when 3 
+            puts '--' * 20
             puts "What has a bank but no money?"
+            puts '--' * 20
             answer = gets.chomp.downcase.split
             puts ' '
             if answer.include?('river')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
-                puts 'Incorrect! The correct answer was river.'
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was river.'
                 incorrect_answers += 1
             end
 
         when 4
+            puts '--' * 20
             puts "It has keys, but no locks. \nIt has space, but no room. \nYou can enter, but you can't go inside.\nWhat is it?"
+            puts '--' * 20
             answer = gets.chomp.downcase.split
             puts ' '
             if answer.include?('keyboard')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
-                puts 'Incorrect! The correct answer was a keyboard.'
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was a keyboard.'
                 incorrect_answers += 1
             end
         when 5
+            puts '--' * 20
             puts "What has a head and a tail, but no body?"
+            puts '--' * 20
             answer = gets.chomp.downcase.split
             puts ' '
             if answer.include?('coin')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
-                puts 'Incorrect! The correct answer was coin.'
+                puts "Incorrect!".colorize(:red)
+                puts ' '
+                puts 'The correct answer was coin.'
                 incorrect_answers += 1
             end
         when 6 
+            puts '--' * 20
             puts "What goes up but never comes down?"
+            puts '--' * 20
             answer = gets.chomp.downcase.split
             puts ' '
             if answer.include?('age')
-                puts 'Correct!'
+                puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
-                puts 'Incorrect! The correct answer was age.'
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was age.'
                 incorrect_answers += 1
             end
         end
@@ -446,6 +475,140 @@ while level == 3 && lives > 0 && path == 1
     end
     system 'clear'
 end
+
+#Third Scene - Path 2 (Leprechaun)
+while level == 3 && lives > 0 && path == 2
+    system 'clear'
+    display_leprechaun_intro
+    incorrect_answers = 0
+    correct_answers = 0
+    math_problem_number = [1, 2, 3, 4, 5, 6]
+    while incorrect_answers < 3 && correct_answers < 3
+        puts ' '
+        puts "Next Problem:\n\n" unless incorrect_answers == 0 && correct_answers == 0
+        
+        problem_selection = math_problem_number.sample
+        math_problem_number.delete(problem_selection)
+        case problem_selection
+        when 1 
+            puts '--' * 20
+            puts "A painting and a sculpture cost $1500 in total."
+            puts "The painting costs $1000 more than the sculpture."
+            puts "How much does the sculpture cost?"
+            puts '--' * 20
+            puts "<Enter number only (no dollar sign)>"
+            answer = gets.chomp.to_i
+            puts ' '
+            if answer == 250
+                puts "Correct!".colorize(:green)
+                correct_answers += 1
+            else 
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer is 250.'
+                incorrect_answers += 1
+            end
+       
+        when 2 
+            puts '--' * 20
+            puts "When William was 8, his brother was half his age. \nNow, Grant is 14. How old is his brother?"
+            puts '--' * 20
+            answer = gets.chomp.to_i
+            puts ' '
+            if answer == 10
+                puts "Correct!".colorize(:green)
+                correct_answers += 1
+            else 
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer is 10.'
+                incorrect_answers += 1
+            end
+
+        when 3 
+            puts '--' * 20
+            puts "What has a bank but no money?"
+            puts '--' * 20
+            answer = gets.chomp.downcase.split
+            puts ' '
+            if answer.include?('river')
+                puts "Correct!".colorize(:green)
+                correct_answers += 1
+            else 
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was river.'
+                incorrect_answers += 1
+            end
+
+        when 4
+            puts '--' * 20
+            puts "It has keys, but no locks. \nIt has space, but no room. \nYou can enter, but you can't go inside.\nWhat is it?"
+            puts '--' * 20
+            answer = gets.chomp.downcase.split
+            puts ' '
+            if answer.include?('keyboard')
+                puts "Correct!".colorize(:green)
+                correct_answers += 1
+            else 
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was a keyboard.'
+                incorrect_answers += 1
+            end
+        when 5
+            puts '--' * 20
+            puts "What has a head and a tail, but no body?"
+            puts '--' * 20
+            answer = gets.chomp.downcase.split
+            puts ' '
+            if answer.include?('coin')
+                puts "Correct!".colorize(:green)
+                correct_answers += 1
+            else 
+                puts "Incorrect!".colorize(:red)
+                puts ' '
+                puts 'The correct answer was coin.'
+                incorrect_answers += 1
+            end
+        when 6 
+            puts '--' * 20
+            puts "What goes up but never comes down?"
+            puts '--' * 20
+            answer = gets.chomp.downcase.split
+            puts ' '
+            if answer.include?('age')
+                puts "Correct!".colorize(:green)
+                correct_answers += 1
+            else 
+                puts "Incorrect!".colorize(:red) 
+                puts ' '
+                puts 'The correct answer was age.'
+                incorrect_answers += 1
+            end
+        end
+        puts ' '
+        puts "Correct answers: #{correct_answers}"
+        puts "Incorrect answers: #{incorrect_answers}"
+        puts ' '
+        puts '<Press Enter to Continue>'
+        gets
+        system 'clear' unless incorrect_answers == 3 || correct_answers == 3
+    end
+
+    if correct_answers == 3
+    puts "Congratulations! You're solved the riddles!"
+        level += 1
+    else
+        puts 'You lost!'
+        riddle_number = [1, 2, 3, 4, 5, 6]
+        lives -= 1
+        check_if_gameover(lives)
+        ask_to_retry_or_quit
+    end
+    system 'clear'
+end
+
 
 #Fourth and Final Scene (Dragon)
 

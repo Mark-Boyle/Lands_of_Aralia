@@ -5,7 +5,7 @@ def display_intro_message
     system 'clear'
     puts ' '
     a = Artii::Base.new
-    puts a.asciify('Lands of Aralia!')
+    puts a.asciify('Lands of Aralia!').colorize(:light_green)
     puts 'Welcome to the Lands of Aralia!!'
     puts ' '
     puts "The Lands of Aralia are a beautiful yet dangerous place."
@@ -124,4 +124,13 @@ def display_first_path_choice
     puts "One direction leads you over the Snowy Mountains."
     puts ' '
     puts "The other takes you down the valley."
+end
+
+def display_second_path_choice
+    puts ' '
+    puts "You've come to a fork in the road."
+    puts ' '
+    puts "One direction leads you along a river."
+    puts ' '
+    puts "The other takes you into the forest."
 end

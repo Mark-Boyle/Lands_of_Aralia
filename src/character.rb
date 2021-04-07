@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Character
     attr_accessor :name, :character_type, :character_health, :actions, :sword_skill, :archery_skill, :armour_rating
 
@@ -57,21 +59,30 @@ class Character
     end
 
     def find_extreme_health_potion
-        puts "You found an Extreme Health Potion! Your health goes up by 50."
+        print "You found an " 
+        print "Extreme Health Potion! ".colorize(:light_magenta) 
+        print "Your health goes up by "
+        puts "50.".colorize(:white)
         @character_health += 50
         puts "Your health is now at #{@character_health}."
         puts ' '
     end
 
     def find_health_potion
-        puts "You found a Health Potion! Your health goes up by 25."
+        print "You found a "
+        print "Health Potion! ".colorize(:light_red) 
+        print "Your health goes up by " 
+        puts "25.".colorize(:white)
         @character_health += 25
         puts "Your health is now at #{@character_health}."
         puts ' '
     end
 
     def find_improved_armour
-        puts "You found some better armour! Your armour rating goes up by 5."
+        print "You found some "
+        print "improved armour! ".colorize(:light_blue)
+        print "Your armour rating goes up by "
+        puts "5.".colorize(:white)
         @armour_rating += 5
         puts "Your new armour rating is #{@armour_rating}."
         puts ' '
