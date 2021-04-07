@@ -8,6 +8,20 @@ require 'colorized_string'
 require 'colorize'
 require 'rspec'
 
+
+argument = ARGV[0]
+ARGV.clear
+
+case argument
+when '--help', '-h'
+    # ARGV.clear
+    puts 'Lands of Aralia App!'
+    exit
+else 
+    # ARGV.clear
+    puts 'Did not work'
+end
+
 prompt = TTY::Prompt.new
 
 level = 1
@@ -64,9 +78,7 @@ def display_info(enemy_health, character_health, enemy_type)
 end
 
 def check_if_gameover(lives)
-    if lives == 0
-        gameover
-    end
+    gameover if lives == 0
 end
 
 def gameover
@@ -78,9 +90,7 @@ end
 def ask_to_retry_or_quit
     puts 'Would you like to retry or exit:'
     input = gets.chomp.downcase
-    if input == 'exit'
-        exit
-    end
+    exit if input == 'exit'
 end
 
 actions = ["Use Sword", "Shoot Arrow", "Search Area"]
@@ -115,7 +125,7 @@ while character_confirmation == 'No'
       end
 end
 
-    system 'clear'
+system 'clear'
 explain_available_items
 
 

@@ -2,10 +2,10 @@ require 'artii'
 require 'colorize'
 
 def display_intro_message
-    system 'clear'
+    # system 'clear'
     puts ' '
-    a = Artii::Base.new
-    puts a.asciify('Lands of Aralia!').colorize(:light_green)
+    # a = Artii::Base.new
+    # puts a.asciify('Lands of Aralia!').colorize(:light_green)
     puts 'Welcome to the Lands of Aralia!!'
     puts ' '
     puts "The Lands of Aralia are a beautiful yet dangerous place."
