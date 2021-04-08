@@ -8,7 +8,7 @@ require 'colorized_string'
 require 'colorize'
 require 'rspec'
 
-character = Character.new('mark', 'human', 100, 0, 0, 0, 'actions')
+character = Character.new
 
 argument = ARGV[0]
 ARGV.clear
@@ -47,16 +47,6 @@ def select_character(prompt)
       end
 end
 
-def select_name
-    puts ' '
-    puts "Please enter the name of your character:"
-    name = gets.chomp
-    system 'clear'
-    puts ' '
-    puts "Welcome #{name}!"
-    name
-end
-
 def character_attack(enemy_health, damage)
     print "You delivered " 
     print "#{damage}".colorize(:white) 
@@ -86,6 +76,11 @@ def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
 end
 
+def display_level_info(level, lives, character, type)
+    puts "Level: #{level}       Lives: #{lives}       Character: #{character} (#{type})".colorize(:light_green)
+    puts ""
+end
+
 def check_if_gameover(lives)
     gameover if lives == 0
 end
@@ -100,17 +95,19 @@ def ask_to_retry_or_quit
     puts 'Would you like to retry or exit:'
     input = gets.chomp.downcase
     exit if input == 'exit'
+    system 'clear'
 end
 
-actions = ["Use Sword", "Shoot Arrow", "Search Area"]
+# actions = ["Use Sword", "Shoot Arrow", "Search Area"]
 dragon_attacks = ['breath fire', 'tail whip', 'slash']
 goblin_attacks = ['scratch', 'throw spear', 'bite']
 troll_attacks = ['swing club', 'punch', 'stomp']
 orc_attacks = ['sword attack', 'dagger attack', 'charge']
 
 display_intro_message
+character.select_name
 
-character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
+# character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
 enemy = Enemy.new('Dragon', 150, 8)
 
 character_confirmation = 'No'
@@ -141,12 +138,13 @@ explain_available_items
 #First Scene (Goblin)
 
 while level == 1 && lives > 0
+    display_level_info(level, lives, character::name, character::character_type)
     display_goblin_intro
     enemy.update_goblin_stats
     character.restore_health(level)
 
     while enemy::enemy_health > 0 && character::character_health > 0
-       
+        puts ' '
         input = prompt.select("Choose your action:") do |menu|
             menu.choice "Use Sword"
             menu.choice "Shoot Arrow"
@@ -155,7 +153,8 @@ while level == 1 && lives > 0
             if level > 2 then menu.choice "Swing Battleaxe" end
           end
         
-        system 'clear'  
+        system 'clear'
+        display_level_info(level, lives, character::name, character::character_type)
         puts ' '
         case input
         when "Use Sword"
@@ -195,12 +194,18 @@ while level == 1 && lives > 0
     end
 
     if character::character_health > 0
+        a = Artii::Base.new
+        puts a.asciify('Victory!').colorize(:light_green)
+        puts ' '
         puts "Congratulations! You defeated the #{enemy::type}!"
         puts ' '
         puts '<Press Enter to Continue>'
         gets
         level += 1
     else 
+        a = Artii::Base.new
+        puts a.asciify('Defeat!').colorize(:light_red)
+        puts ' '
         puts 'You lost!'
         lives -= 1
         check_if_gameover(lives)
@@ -215,11 +220,13 @@ path = prompt.select("What path would you like to go down?") do |menu|
     menu.choice "Snowy Mountains", 1
     menu.choice "Valley", 2
   end
+system 'clear'
 
 
 #Second Scene - Path 1 (Troll)
 
 while level == 2 && lives > 0 && path == 1
+    display_level_info(level, lives, character::name, character::character_type)
     display_troll_intro
     enemy.update_troll_stats
     character.restore_health(level)
@@ -233,6 +240,7 @@ while level == 2 && lives > 0 && path == 1
             if level > 2 then menu.choice "Swing Battleaxe" end
           end
         system 'clear'  
+        display_level_info(level, lives, character::name, character::character_type)
         puts ' '
         case input
         when "Use Sword"
@@ -271,12 +279,18 @@ while level == 2 && lives > 0 && path == 1
 
 
     if character::character_health > 0
+        a = Artii::Base.new
+        puts a.asciify('Victory!').colorize(:light_green)
+        puts ' '
         puts "Congratulations! You defeated the #{enemy::type}!"
         puts ' '
         puts '<Press Enter to Continue>'
         gets
         level += 1
     else 
+        a = Artii::Base.new
+        puts a.asciify('Defeat!').colorize(:light_red)
+        puts ' '
         puts 'You lost!'
         lives -= 1
         check_if_gameover(lives)
@@ -287,6 +301,7 @@ end
 # #Second Scene - Path 2 (Orc)
 
 while level == 2 && lives > 0 && path == 2
+    display_level_info(level, lives, character::name, character::character_type)
     display_orc_intro
     enemy.update_orc_stats
     character.restore_health(level)
@@ -301,6 +316,7 @@ while level == 2 && lives > 0 && path == 2
             if level > 2 then menu.choice "Swing Battleaxe" end
           end
         system 'clear'  
+        display_level_info(level, lives, character::name, character::character_type)
         puts ' '
         case input
         when "Use Sword"
@@ -338,6 +354,9 @@ while level == 2 && lives > 0 && path == 2
 
 
     if character::character_health > 0
+        a = Artii::Base.new
+        puts a.asciify('Victory!').colorize(:light_green)
+        puts ' '
         puts "Congratulations! You defeated the #{enemy::type}!"
         puts ' '
         puts '<Press Enter to Continue>'
@@ -345,6 +364,9 @@ while level == 2 && lives > 0 && path == 2
         level += 1
         path = 1
     else 
+        a = Artii::Base.new
+        puts a.asciify('Defeat!').colorize(:light_red)
+        puts ' '
         puts 'You lost!'
         lives -= 1
         check_if_gameover(lives)
@@ -364,11 +386,13 @@ path = prompt.select("What path would you like to go down?") do |menu|
 
 while level == 3 && lives > 0 && path == 1
     system 'clear'
+    display_level_info(level, lives, character::name, character::character_type)
     display_witch_intro
     incorrect_answers = 0
     correct_answers = 0
     riddle_number = [1, 2, 3, 4, 5, 6]
     while incorrect_answers < 3 && correct_answers < 3
+        display_level_info(level, lives, character::name, character::character_type) unless incorrect_answers == 0 && correct_answers == 0
         puts ' '
         puts "Next Riddle:\n\n" unless incorrect_answers == 0 && correct_answers == 0
         
@@ -380,7 +404,6 @@ while level == 3 && lives > 0 && path == 1
             puts "What has legs but can't walk?"
             puts '--' * 20
             answer = gets.chomp.downcase.split
-            puts answer
             puts ' '
             if answer.include?('chair')
                 puts "Correct!".colorize(:green)
@@ -483,9 +506,15 @@ while level == 3 && lives > 0 && path == 1
     end
 
     if correct_answers == 3
+        a = Artii::Base.new
+        puts a.asciify('Victory!').colorize(:light_green)
+        puts ' '
     puts "Congratulations! You're solved the riddles!"
         level += 1
     else
+        a = Artii::Base.new
+        puts a.asciify('Defeat!').colorize(:light_red)
+        puts ' '
         puts 'You lost!'
         riddle_number = [1, 2, 3, 4, 5, 6]
         lives -= 1
@@ -498,11 +527,13 @@ end
 #Third Scene - Path 2 (Leprechaun)
 while level == 3 && lives > 0 && path == 2
     system 'clear'
+    display_level_info(level, lives, character::name, character::character_type)
     display_leprechaun_intro
     incorrect_answers = 0
     correct_answers = 0
     math_problem_number = [1, 2, 3, 4, 5, 6]
     while incorrect_answers < 3 && correct_answers < 3
+        display_level_info(level, lives, character::name, character::character_type) unless incorrect_answers == 0 && correct_answers == 0
         puts ' '
         puts "Next Problem:\n\n" unless incorrect_answers == 0 && correct_answers == 0
         
@@ -618,9 +649,15 @@ while level == 3 && lives > 0 && path == 2
     end
 
     if correct_answers == 3
-    puts "Congratulations! You're solved the riddles!"
+        a = Artii::Base.new
+        puts a.asciify('Victory!').colorize(:light_green)
+        puts ' '
+        puts "Congratulations! You're solved the riddles!"
         level += 1
     else
+        a = Artii::Base.new
+        puts a.asciify('Defeat!').colorize(:light_red)
+        puts ' '
         puts 'You lost!'
         riddle_number = [1, 2, 3, 4, 5, 6]
         lives -= 1
@@ -634,6 +671,7 @@ end
 #Fourth and Final Scene (Dragon)
 
 while level == 4 && lives > 0
+    display_level_info(level, lives, character::name, character::character_type)
     display_dragon_intro
     enemy.update_dragon_stats
     character.restore_health(level)
@@ -648,6 +686,7 @@ while level == 4 && lives > 0
             if level > 2 then menu.choice "Swing Battleaxe" end
           end
         system 'clear'  
+        display_level_info(level, lives, character::name, character::character_type)
         puts ' '
         case input
         when "Use Sword"
@@ -684,17 +723,20 @@ while level == 4 && lives > 0
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
 
-
     if character::character_health > 0
+        a = Artii::Base.new
+        puts a.asciify('Victory!').colorize(:light_green)
         puts "Congratulations! You defeated the #{enemy::type}!"
         puts ' '
-        puts '<Press Enter to Continue>'
-        gets
-        level += 1
+        display_victory_message
+        puts ' '
+        exit
     else 
+        a = Artii::Base.new
+        puts a.asciify('Defeat!').colorize(:light_red)
         puts 'You lost!'
         lives -= 1
         check_if_gameover(lives)
         ask_to_retry_or_quit
     end
-end
+end 

@@ -35,19 +35,20 @@ def explain_available_items
     puts ' '
     puts "<Press Enter to begin>"
     gets
+    system 'clear'
 end
 
-def display_enemy_intro
-    system 'clear'
-    puts ' '
-    puts "An enemy appears in front of you."
-    puts "It gives you an evil glare and a small smirk appears across it's face."
-    puts "It comes charging at you!"
-    puts ' '
-end
+# def display_enemy_intro
+#     system 'clear'
+#     puts ' '
+#     puts "An enemy appears in front of you."
+#     puts "It gives you an evil glare and a small smirk appears across it's face."
+#     puts "It comes charging at you!"
+#     puts ' '
+# end
 
 def display_goblin_intro
-    system 'clear'
+    # system 'clear'
     puts ' '
     puts 'You begin your adventure by hiking through the fields of Yellow Meadows.'
     puts 'Eager to explore the new lands you power forward full of energy.'
@@ -60,7 +61,7 @@ def display_goblin_intro
 end
 
 def display_troll_intro
-    system 'clear'
+    # system 'clear'
     puts ' '
     puts 'Climbing through the Snowy Mountains is hard work.'
     puts 'The temperatures are freezing and the wind is strong.'
@@ -74,7 +75,7 @@ def display_troll_intro
 end
 
 def display_orc_intro
-    system 'clear'
+    # system 'clear'
     puts ' '
     puts 'Wandering down the valley.'
     puts 'An Orc jumps out from behind a rock!.'
@@ -155,3 +156,4 @@ def display_second_path_choice
     puts ' '
     puts "The other takes you into the forest."
 end
+

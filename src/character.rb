@@ -3,14 +3,13 @@ require 'colorize'
 class Character
     attr_accessor :name, :character_type, :character_health, :actions, :sword_skill, :archery_skill, :armour_rating
 
-    def initialize (name, character_type, character_health, sword_skill, archery_skill, armour_rating, actions)
-        @name = name
-        @character_type = character_type
-        @character_health = character_health
-        @sword_skill = sword_skill
-        @archery_skill = archery_skill
-        @armour_rating = armour_rating
-        @actions = actions
+    def initialize
+        @name = 'Default'
+        @character_type = 'Default'
+        @character_health = 100
+        @sword_skill = 0
+        @archery_skill = 0
+        @armour_rating = 0
     end
 
     def display_character_info
@@ -21,6 +20,15 @@ class Character
         puts "Sword Level: #{@sword_skill}"
         puts "Archery Level: #{@archery_skill}"
         puts "Armour Rating: #{@armour_rating}"
+    end
+
+    def select_name
+        puts ' '
+        puts "Please enter the name of your character:"
+        @name = gets.chomp
+        system 'clear'
+        puts ' '
+        puts "Welcome #{@name}!"
     end
 
     def update_elf_stats
