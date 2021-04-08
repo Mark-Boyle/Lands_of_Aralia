@@ -546,63 +546,65 @@ while level == 3 && lives > 0 && path == 2
 
         when 3 
             puts '--' * 20
-            puts "What has a bank but no money?"
+            puts "On a farm there are only sheep, goats and horses."
+            puts "All the animals are sheep except for three, \nall  are goats except for four, \nand all are horses except for five."
+            puts "How many goats are there?"
             puts '--' * 20
-            answer = gets.chomp.downcase.split
+            answer = gets.chomp.to_i
             puts ' '
-            if answer.include?('river')
+            if answer == 2
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red) 
                 puts ' '
-                puts 'The correct answer was river.'
+                puts 'The correct answer was 2.'
                 incorrect_answers += 1
             end
 
         when 4
             puts '--' * 20
-            puts "It has keys, but no locks. \nIt has space, but no room. \nYou can enter, but you can't go inside.\nWhat is it?"
+            puts "I am a three-digit number. \nMy second digit is 4 times bigger than the third digit. \nMy first digit is 3 less than my second digit. \nWho am I?"
             puts '--' * 20
-            answer = gets.chomp.downcase.split
+            answer = gets.chomp.to_i
             puts ' '
-            if answer.include?('keyboard')
+            if answer == 141
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red) 
                 puts ' '
-                puts 'The correct answer was a keyboard.'
+                puts 'The correct answer was 141.'
                 incorrect_answers += 1
             end
         when 5
             puts '--' * 20
-            puts "What has a head and a tail, but no body?"
+            puts "A man is twice as old as his little sister. \nHe is also half as old as their dad. \nOver a period of 50 years, the age of the sister will become half of their dad’s age. \nWhat is the age of the man now?"
             puts '--' * 20
-            answer = gets.chomp.downcase.split
+            answer = gets.chomp.to_i
             puts ' '
-            if answer.include?('coin')
+            if answer == 50
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red)
                 puts ' '
-                puts 'The correct answer was coin.'
+                puts 'The correct answer was 50.'
                 incorrect_answers += 1
             end
         when 6 
             puts '--' * 20
-            puts "What goes up but never comes down?"
+            puts "There are a certain number of books on my bookshelf. \nI took a book which is 6th from the right and 4th from the left. \nCan you find out the number of books on my shelf?"
             puts '--' * 20
-            answer = gets.chomp.downcase.split
+            answer = gets.chomp.to_i
             puts ' '
-            if answer.include?('age')
+            if answer == 9
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red) 
                 puts ' '
-                puts 'The correct answer was age.'
+                puts 'The correct answer was 9.'
                 incorrect_answers += 1
             end
         end
