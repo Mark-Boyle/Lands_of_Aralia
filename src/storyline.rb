@@ -2,10 +2,10 @@ require 'artii'
 require 'colorize'
 
 def display_intro_message
-    # system 'clear'
+    system 'clear'
     puts ' '
-    # a = Artii::Base.new
-    # puts a.asciify('Lands of Aralia!').colorize(:light_green)
+    a = Artii::Base.new
+    puts a.asciify('Lands of Aralia!').colorize(:light_green)
     puts 'Welcome to the Lands of Aralia!!'
     puts ' '
     puts "The Lands of Aralia are a beautiful yet dangerous place."
@@ -96,8 +96,6 @@ def display_dragon_intro
     puts "As you try to sneak past, the dragon opens its eyes, raises its head \nand breaths fire in your direction!"
     puts "You manage to hide behind a rock but you realise the battle has begun!!"
     puts ' '
-
-
 end
 
 def display_witch_intro
@@ -114,7 +112,30 @@ end
 
 def display_leprechaun_intro
     puts ' '
-    puts "**Leprechaun Intro**"
+    puts "You wander through the forest, listening to the birds singing."
+    puts ' '
+    puts 'Out from behind a tree jumps a little leprechaun!'
+    puts 'Dancing on his toes, he greets you with a smile on his face.'
+    puts ' '
+    puts "'Hello adventurous explorer! What a fine day for a stroll!'"
+    puts "'I have a little game for you. Some math problems to solve.'"
+    puts "3 correct answers will set you further on your path."
+    puts "But 3 incorrect answers and you shall not pass!"
+    puts ' '
+    puts 'The first problem is:'
+end
+
+def display_victory_message
+    puts ' '
+    puts "As the Dragon slumps to the ground, \n"
+    puts "you run to the back of the cavern to claim your prize."
+    puts ' '
+    puts "As you pick up the Legendary Ruby Gemstone it shines\n"
+    puts "brighlty in your hands, lighting up the cavern in red."
+    puts ' '
+    puts 'You stare deeply into the gemstone and are in awe of its beauty!' 
+    puts ' '
+    puts "Victory is yours!!"
 end
 
 def display_first_path_choice

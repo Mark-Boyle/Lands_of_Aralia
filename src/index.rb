@@ -8,18 +8,27 @@ require 'colorized_string'
 require 'colorize'
 require 'rspec'
 
+character = Character.new('mark', 'human', 100, 0, 0, 0, 'actions')
 
 argument = ARGV[0]
 ARGV.clear
 
 case argument
 when '--help', '-h'
-    # ARGV.clear
     puts 'Lands of Aralia App!'
     exit
-else 
-    # ARGV.clear
-    puts 'Did not work'
+when '--elf', '-e'
+    character.update_elf_stats
+    character.display_character_info
+    exit
+when '--dwarf', '-d'
+    character.update_dwarf_stats
+    character.display_character_info
+    exit
+when '--warrior', '-w'
+    character.update_warrior_stats
+    character.display_character_info
+    exit
 end
 
 prompt = TTY::Prompt.new
