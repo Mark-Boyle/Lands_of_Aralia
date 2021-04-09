@@ -2,10 +2,15 @@ GEM
   remote: https://rubygems.org/
   specs:
     artii (2.1.2)
+    asciiart (0.0.10)
+      rainbow (= 2.0.0)
+      rmagick (= 2.13.4)
     colorize (0.8.1)
     diff-lcs (1.4.4)
     pastel (0.8.0)
       tty-color (~> 0.5)
+    rainbow (2.0.0)
+    rmagick (2.13.4)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -36,6 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   artii (~> 2.1)
+  asciiart (~> 0.0.10)
   colorize (~> 0.8.1)
   rspec (~> 3.10)
   tty-prompt (~> 0.23.0)

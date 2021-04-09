@@ -1,10 +1,10 @@
 require_relative '../character.rb'
+# require_relative '../index.rb'
 
 RSpec.describe Character do
     subject(:character){
-        Character.new('Mark', 'human', 100, 0, 0, 0, 'actions')
+        Character.new
     }
-
         context 'check updating elf stats' do
             before(:each) do 
                 character.update_elf_stats
@@ -34,5 +34,10 @@ RSpec.describe Character do
                 expect(character.character_health).not_to eq(120) 
             end
         end
-    
+
+        context 'check generated damage' do
+            it 'should produce an integer when Use Sword is choosen' do
+                expect(character.generate_sword_damage).to be_a Integer 
+            end
+        end
     end

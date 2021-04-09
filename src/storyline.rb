@@ -1,3 +1,4 @@
+require_relative('character')
 require 'artii'
 require 'colorize'
 
@@ -18,7 +19,8 @@ def display_intro_message
     # puts String.color_samples  
 end
 
-def explain_available_items
+def explain_available_items(name)
+    puts "Welcome #{name}!".colorize(:light_green)
     puts ' '
     puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
     puts "You have with you:"
@@ -37,15 +39,6 @@ def explain_available_items
     gets
     system 'clear'
 end
-
-# def display_enemy_intro
-#     system 'clear'
-#     puts ' '
-#     puts "An enemy appears in front of you."
-#     puts "It gives you an evil glare and a small smirk appears across it's face."
-#     puts "It comes charging at you!"
-#     puts ' '
-# end
 
 def display_goblin_intro
     # system 'clear'
@@ -157,3 +150,38 @@ def display_second_path_choice
     puts "The other takes you into the forest."
 end
 
+def display_level_1_victory
+system 'clear'
+puts 'Level UP!!'.colorize(:light_blue)
+puts ' '
+puts 'You are now on Level 2!'
+puts ' '
+puts "Your health has gone up to 120 and \nyou have been rewarded with a Spear!"
+puts ' '
+puts '<Press Enter to Continue>'
+gets
+end
+
+def display_level_2_victory
+    system 'clear'
+    puts 'Level UP!!'.colorize(:light_blue)
+    puts ' '
+    puts 'You are now on Level 3!'
+    puts ' '
+    puts "Your health has gone up to 130 and \nyou have been rewarded with a Battleaxe!"
+    puts ' '
+    puts '<Press Enter to Continue>'
+    gets
+end
+
+def display_level_3_victory
+    system 'clear'
+    puts 'Level UP!!'.colorize(:light_blue)
+    puts ' '
+    puts 'You are now on Level 4!'
+    puts ' '
+    puts "Your health has gone up to 140!"
+    puts ' '
+    puts '<Press Enter to Continue>'
+    gets
+end

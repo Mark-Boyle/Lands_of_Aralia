@@ -92,9 +92,12 @@ def gameover
 end
 
 def ask_to_retry_or_quit
-    puts 'Would you like to retry or exit:'
-    input = gets.chomp.downcase
-    exit if input == 'exit'
+    prompt = TTY::Prompt.new
+    input = prompt.select("Would you like to Try Again or Exit?:") do |menu|
+        menu.choice "Try Again"
+        menu.choice "Exit"
+    end
+    exit if input == 'Exit'
     system 'clear'
 end
 
@@ -132,7 +135,7 @@ while character_confirmation == 'No'
 end
 
 system 'clear'
-explain_available_items
+explain_available_items(character::name)
 
 
 #First Scene (Goblin)
@@ -202,6 +205,8 @@ while level == 1 && lives > 0
         puts '<Press Enter to Continue>'
         gets
         level += 1
+        character.restore_health(level)
+        display_level_1_victory
     else 
         a = Artii::Base.new
         puts a.asciify('Defeat!').colorize(:light_red)

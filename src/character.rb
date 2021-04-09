@@ -92,17 +92,23 @@ class Character
         print "Your armour rating goes up by "
         puts "5.".colorize(:white)
         @armour_rating += 5
+        begin
+            raise MaximumArmourError if @armour_rating > 15
+        rescue
+            @armour_rating = 15
+            puts "Armour rating can't be more than 15."
+        end
         puts "Your new armour rating is #{@armour_rating}."
         puts ' '
     end
 
     def generate_sword_damage
-        attack_damage = rand(30) + (@sword_skill * 3)
+        attack_damage = rand(30) + (@sword_skill * 2)
         attack_damage
     end
 
     def generate_archery_damage
-        attack_damage = rand(30) + (@archery_skill * 3)
+        attack_damage = rand(30) + (@archery_skill * 2)
         attack_damage
     end
 

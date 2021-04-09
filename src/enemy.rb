@@ -20,19 +20,19 @@ class Enemy
 
     def update_troll_stats
         @type = 'Troll'
-        @enemy_health = 120
+        @enemy_health = 140
         @attacking_force = 3
     end
 
     def update_orc_stats
         @type = 'Orc'
-        @enemy_health = 110
+        @enemy_health = 130
         @attacking_force = 4
     end
 
     def update_dragon_stats
         @type = 'Dragon'
-        @enemy_health = 160
-        @attacking_force = 5
+        @enemy_health = 180
+        @attacking_force = 6
     end
 end
