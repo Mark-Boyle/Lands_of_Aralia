@@ -72,6 +72,12 @@ class Character
         print "Your health goes up by "
         puts "50.".colorize(:white)
         @character_health += 50
+        begin
+            raise MaximumHealthError if @character_health > 200
+        rescue
+            @character_health = 200
+            puts "Health can't be more than 200."
+        end
         puts "Your health is now at #{@character_health}."
         puts ' '
     end
@@ -82,6 +88,12 @@ class Character
         print "Your health goes up by " 
         puts "25.".colorize(:white)
         @character_health += 25
+        begin
+            raise MaximumHealthError if @character_health > 200
+        rescue
+            @character_health = 200
+            puts "Health can't be more than 200."
+        end
         puts "Your health is now at #{@character_health}."
         puts ' '
     end
