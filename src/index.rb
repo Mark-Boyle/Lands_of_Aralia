@@ -270,6 +270,7 @@ while level == 2 && lives > 0 && path == 1
 
     if character::character_health > 0
         display_victory_message(enemy::type)
+        display_level_2_victory
         level += 1
     else 
         a = Artii::Base.new
@@ -331,6 +332,7 @@ while level == 2 && lives > 0 && path == 2
 
     if character::character_health > 0
         display_victory_message(enemy::type)
+        display_level_2_victory
         level += 1
     else 
         a = Artii::Base.new
@@ -478,6 +480,7 @@ while level == 3 && lives > 0 && path == 1
         puts a.asciify('Victory!').colorize(:light_green)
         puts ' '
         puts "Congratulations! You're solved the riddles!"
+        display_level_3_victory
         level += 1
     else
         a = Artii::Base.new
@@ -529,7 +532,7 @@ while level == 3 && lives > 0 && path == 2
        
         when 2 
             puts '--' * 20
-            puts "When William was 8, his brother was half his age. \nNow, Grant is 14. How old is his brother?"
+            puts "When William was 8, his brother was half his age. \nNow, William is 14. How old is his brother?"
             puts '--' * 20
             answer = gets.chomp.to_i
             puts ' '
@@ -545,8 +548,8 @@ while level == 3 && lives > 0 && path == 2
 
         when 3 
             puts '--' * 20
-            puts "On a farm there are only sheep, goats and horses."
-            puts "All the animals are sheep except for three, \nall  are goats except for four, \nand all are horses except for five."
+            puts "On a farm there are sheep, goats and horses."
+            puts "All the animals are sheep except for three. \nAll the animals are goats except for four. \nAll the animals are horses except for five."
             puts "How many goats are there?"
             puts '--' * 20
             answer = gets.chomp.to_i
@@ -563,47 +566,47 @@ while level == 3 && lives > 0 && path == 2
 
         when 4
             puts '--' * 20
-            puts "I am a three-digit number. \nMy second digit is 4 times bigger than the third digit. \nMy first digit is 3 less than my second digit. \nMy third digit is the same as my first digit.\nWho am I?"
+            puts "I am a three-digit number. \nMy first digit is 3 less than my second digit.\nMy second digit is 3 times bigger than the third digit. \nMy third digit is half as big as my first digit.\nWhat number am I?"
             puts '--' * 20
             answer = gets.chomp.to_i
             puts ' '
-            if answer == 141
+            if answer == 693
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red) 
                 puts ' '
-                puts 'The correct answer was 141.'
+                puts 'The correct answer was 693.'
                 incorrect_answers += 1
             end
         when 5
             puts '--' * 20
-            puts "A man is twice as old as his little sister. \nHe is also half as old as their dad. \nOver a period of 50 years, the age of the sister will become half of their dad’s age. \nWhat is the age of the man now?"
+            puts "What is the square root of 196?"
             puts '--' * 20
             answer = gets.chomp.to_i
             puts ' '
-            if answer == 50
+            if answer == 14
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red)
                 puts ' '
-                puts 'The correct answer was 50.'
+                puts 'The correct answer was 14.'
                 incorrect_answers += 1
             end
         when 6 
             puts '--' * 20
-            puts "There are a certain number of books on my bookshelf. \nI took a book which is 6th from the right and 4th from the left. \nCan you find out the number of books on my shelf?"
+            puts "There are a certain number of books on the bookshelf. \nI took away a book which is 6th from the right and 4th from the left. \nHow many books are still on the shelf?"
             puts '--' * 20
             answer = gets.chomp.to_i
             puts ' '
-            if answer == 9
+            if answer == 8
                 puts "Correct!".colorize(:green)
                 correct_answers += 1
             else 
                 puts "Incorrect!".colorize(:red) 
                 puts ' '
-                puts 'The correct answer was 9.'
+                puts 'The correct answer was 8.'
                 incorrect_answers += 1
             end
         end
@@ -621,6 +624,7 @@ while level == 3 && lives > 0 && path == 2
         puts a.asciify('Victory!').colorize(:light_green)
         puts ' '
         puts "Congratulations! You're solved the riddles!"
+        display_level_3_victory
         level += 1
     else
         a = Artii::Base.new
@@ -635,16 +639,13 @@ while level == 3 && lives > 0 && path == 2
     system 'clear'
 end
 
-
 #Fourth and Final Scene (Dragon)
-
 while level == 4 && lives > 0
     display_level_info(level, lives, character::name, character::character_type, character::armour_rating)
     display_dragon_intro
     enemy.update_dragon_stats
     character.restore_health(level)
     
-
     while enemy::enemy_health > 0 && character::character_health > 0
         input = display_action_selection(level)
         system 'clear'  

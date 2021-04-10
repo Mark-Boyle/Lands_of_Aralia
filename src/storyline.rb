@@ -86,9 +86,10 @@ def display_dragon_intro
     puts "The cave opens up into a large cavern with natural light \nshining down from high above."
     puts ' '
     puts "In the middle of the cavern lies a sleeping dragon."
-    puts 'You see the Legendary Ruby Gemstone behind the dragon and feel a jolt of excitement!'
+    puts "You see the Legendary Ruby Gemstone behind the dragon \nand feel a jolt of excitement!"
     puts ' '
-    puts "As you try to sneak past, the dragon opens its eyes, raises its head \nand breaths fire in your direction!"
+    puts "As you try to sneak past, the dragon opens its eyes, raises its head." 
+    puts "With an angry glare it breaths fire in your direction!"
     puts "You manage to hide behind a rock but you realise the battle has begun!!"
     puts ' '
 end
@@ -132,6 +133,8 @@ end
 
 def display_final_victory_message
     system 'clear'
+    puts ' '
+    puts 'Congratulations!!'.colorize(:light_green)
     puts ' '
     puts "As the Dragon slumps to the ground, \n"
     puts "you run to the back of the cavern to claim your prize."

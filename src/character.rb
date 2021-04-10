@@ -70,8 +70,8 @@ class Character
         print "You found an " 
         print "Extreme Health Potion! ".colorize(:light_magenta) 
         print "Your health goes up by "
-        puts "50.".colorize(:white)
-        @character_health += 50
+        puts "60.".colorize(:white)
+        @character_health += 60
         begin
             raise MaximumHealthError if @character_health > 200
         rescue
@@ -86,8 +86,8 @@ class Character
         print "You found a "
         print "Health Potion! ".colorize(:light_red) 
         print "Your health goes up by " 
-        puts "25.".colorize(:white)
-        @character_health += 25
+        puts "30.".colorize(:white)
+        @character_health += 30
         begin
             raise MaximumHealthError if @character_health > 200
         rescue
