@@ -1,4 +1,5 @@
 require_relative('character')
+require_relative('enemy')
 require 'artii'
 require 'colorize'
 
@@ -119,7 +120,18 @@ def display_leprechaun_intro
     puts 'The first problem is:'
 end
 
-def display_victory_message
+def display_victory_message(enemy)
+    a = Artii::Base.new
+    puts a.asciify('Victory!').colorize(:light_green)
+    puts ' '
+    puts "Congratulations! You defeated the #{enemy}!"
+    puts ' '
+    puts '<Press Enter to Continue>'
+    gets
+end
+
+def display_final_victory_message
+    system 'clear'
     puts ' '
     puts "As the Dragon slumps to the ground, \n"
     puts "you run to the back of the cavern to claim your prize."
@@ -148,6 +160,14 @@ def display_second_path_choice
     puts "One direction leads you along a river."
     puts ' '
     puts "The other takes you into the forest."
+end
+
+def process_first_path_choice
+    prompt = TTY::Prompt.new
+    path = prompt.select("What path would you like to go down?") do |menu|
+        menu.choice "Snowy Mountains", 1
+        menu.choice "Valley", 2
+    end
 end
 
 def display_level_1_victory
