@@ -175,7 +175,7 @@ def display_level_1_victory
     puts 'Level UP!!'.colorize(:light_blue)
     puts ' '
     print 'You are now on Level '
-    puts "1".colorize(:light_yellow)
+    puts "2".colorize(:light_yellow)
     puts ' '
     print "Your health has gone up to "
     puts "120.".colorize(:light_yellow)
