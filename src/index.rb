@@ -9,14 +9,13 @@ require 'colorize'
 require 'rspec'
 
 character = Character.new
+enemy = Enemy.new
 
 argument = ARGV[0]
 ARGV.clear
-
 case argument
 when '--help', '-h'
-    puts 'Lands of Aralia is an action/adventure game played on the terminal!'
-    puts ' '
+    display_help_documentation
     exit
 when '--elf', '-e'
     character.update_elf_stats
@@ -36,7 +35,6 @@ prompt = TTY::Prompt.new
 
 level = 1
 lives = 3
-path = 1
 
 #Introduction
 def select_character(prompt)
@@ -45,12 +43,12 @@ def select_character(prompt)
         menu.choice 'Elf'
         menu.choice 'Dwarf'
         menu.choice 'Warrior'
-      end
+    end
 end
 
 def character_attack(enemy_health, damage)
     print "You delivered " 
-    print "#{damage}".colorize(:white) 
+    print "#{damage}".colorize(:light_yellow) 
     print " points of damage!"
     enemy_health -= damage
 end
@@ -59,7 +57,7 @@ def enemy_attack(character_health, damage, enemy_attacks, enemy_type)
     print "The #{enemy_type} attacked you with " 
     print "#{enemy_attacks.sample}".colorize(:cyan)
     print " and did "
-    print "#{damage}".colorize(:white)
+    print "#{damage}".colorize(:light_yellow)
     print " points of damage!"
     character_health -= damage
 end
@@ -79,9 +77,9 @@ def display_info(enemy_health, character_health, enemy_type)
     puts '--' * 20
     puts ' '
     print "#{enemy_type} Health: "
-    print "#{enemy_health}\n".colorize(:white)
+    print "#{enemy_health}\n".colorize(:light_yellow)
     print "Your Health: "
-    print "#{character_health}\n".colorize(:white)
+    print "#{character_health}\n".colorize(:light_yellow)
     puts ' '
     puts '--' * 20
 end
@@ -119,11 +117,7 @@ orc_attacks = ['sword attack', 'dagger attack', 'charge']
 display_intro_message
 character.select_name
 
-# character = Character.new(select_name, 'human', 100, 0, 0, 0, actions)
-enemy = Enemy.new('Dragon', 150, 8)
-
 character_confirmation = 'No'
-
 while character_confirmation == 'No'
     system 'clear'
     character_choice = select_character(prompt)
@@ -143,12 +137,9 @@ while character_confirmation == 'No'
       end
 end
 
-system 'clear'
 explain_available_items(character::name)
 
-
 #First Scene (Goblin)
-
 while level == 1 && lives > 0
     display_level_info(level, lives, character::name, character::character_type, character::armour_rating)
     display_goblin_intro
@@ -158,7 +149,6 @@ while level == 1 && lives > 0
     while enemy::enemy_health > 0 && character::character_health > 0
         puts ' '
         input = display_action_selection(level)
-        
         system 'clear'
         display_level_info(level, lives, character::name, character::character_type, character::armour_rating)
         puts ' '
@@ -214,13 +204,10 @@ end
 system 'clear'
 display_first_path_choice
 puts ' '
-
 path = process_first_path_choice
 system 'clear'
 
-
 #Second Scene - Path 1 (Troll)
-
 while level == 2 && lives > 0 && path == 1
     display_level_info(level, lives, character::name, character::character_type, character::armour_rating)
     display_troll_intro
@@ -254,9 +241,7 @@ while level == 2 && lives > 0 && path == 1
             rescue
             enemy::enemy_health = 0
         end
-
         if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, troll_attacks, enemy::type) end
-        
         begin
             raise HealthBelowZeroError if character::character_health < 0
             rescue
@@ -266,7 +251,6 @@ while level == 2 && lives > 0 && path == 1
         puts ' '
         display_info(enemy::enemy_health, character::character_health, enemy::type)
     end
-
 
     if character::character_health > 0
         display_victory_message(enemy::type)
@@ -284,7 +268,6 @@ while level == 2 && lives > 0 && path == 1
 end
 
 # #Second Scene - Path 2 (Orc)
-
 while level == 2 && lives > 0 && path == 2
     display_level_info(level, lives, character::name, character::character_type, character::armour_rating)
     display_orc_intro
@@ -315,15 +298,14 @@ while level == 2 && lives > 0 && path == 2
 
         begin
             raise HealthBelowZeroError if enemy::enemy_health < 0
-            rescue
+        rescue
             enemy::enemy_health = 0
         end
-
         if enemy::enemy_health > 0 then character::character_health = enemy_attack(character::character_health, enemy::generate_attack_damage - character::armour_rating, orc_attacks, enemy::type) end
         
         begin
             raise HealthBelowZeroError if character::character_health < 0
-            rescue
+        rescue
             character::character_health = 0
         end
         puts ' '
@@ -354,7 +336,6 @@ path = prompt.select("What path would you like to go down?") do |menu|
   end
 
 #Third Scene - Path 1 (Witch)
-
 while level == 3 && lives > 0 && path == 1
     system 'clear'
     display_level_info(level, lives, character::name, character::character_type, character::armour_rating)
@@ -670,7 +651,7 @@ while level == 4 && lives > 0
 
         begin
             raise HealthBelowZeroError if enemy::enemy_health < 0
-            rescue
+        rescue
             enemy::enemy_health = 0
         end
 

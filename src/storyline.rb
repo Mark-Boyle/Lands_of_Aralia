@@ -17,10 +17,10 @@ def display_intro_message
     puts "But it is said that this Ruby Gemstone is more beautiful than the \nmind can comprehend."
     puts ' '
     puts "One brave, adventurous soul has set out on a quest\nto find it!"
-    # puts String.color_samples  
 end
 
 def explain_available_items(name)
+    system 'clear'
     puts "Welcome #{name}!".colorize(:light_green)
     puts ' '
     puts "You are about to embark on a quest for the Legendary Ruby Gemstone!"
@@ -42,7 +42,6 @@ def explain_available_items(name)
 end
 
 def display_goblin_intro
-    # system 'clear'
     puts ' '
     puts 'You begin your adventure by hiking through the fields of Yellow Meadows.'
     puts 'Eager to explore the new lands you power forward full of energy.'
@@ -55,7 +54,6 @@ def display_goblin_intro
 end
 
 def display_troll_intro
-    # system 'clear'
     puts ' '
     puts 'Climbing through the Snowy Mountains is hard work.'
     puts 'The temperatures are freezing and the wind is strong.'
@@ -69,7 +67,6 @@ def display_troll_intro
 end
 
 def display_orc_intro
-    # system 'clear'
     puts ' '
     puts 'Wandering down the valley.'
     puts 'An Orc jumps out from behind a rock!.'
@@ -174,24 +171,32 @@ def process_first_path_choice
 end
 
 def display_level_1_victory
-system 'clear'
-puts 'Level UP!!'.colorize(:light_blue)
-puts ' '
-puts 'You are now on Level 2!'
-puts ' '
-puts "Your health has gone up to 120 and \nyou have been rewarded with a Spear!"
-puts ' '
-puts '<Press Enter to Continue>'
-gets
+    system 'clear'
+    puts 'Level UP!!'.colorize(:light_blue)
+    puts ' '
+    print 'You are now on Level '
+    puts "1".colorize(:light_yellow)
+    puts ' '
+    print "Your health has gone up to "
+    puts "120.".colorize(:light_yellow)
+    print "You have been rewarded with a "
+    puts "Spear!".colorize(:cyan)
+    puts ' '
+    puts '<Press Enter to Continue>'
+    gets
 end
 
 def display_level_2_victory
     system 'clear'
     puts 'Level UP!!'.colorize(:light_blue)
     puts ' '
-    puts 'You are now on Level 3!'
+    print 'You are now on Level '
+    puts "3".colorize(:light_yellow)
     puts ' '
-    puts "Your health has gone up to 130 and \nyou have been rewarded with a Battleaxe!"
+    print "Your health has gone up to "
+    puts "130.".colorize(:light_yellow)
+    print "You have been rewarded with a "
+    puts "Battleaxe!".colorize(:cyan)
     puts ' '
     puts '<Press Enter to Continue>'
     gets
@@ -201,9 +206,11 @@ def display_level_3_victory
     system 'clear'
     puts 'Level UP!!'.colorize(:light_blue)
     puts ' '
-    puts 'You are now on Level 4!'
+    print 'You are now on Level '
+    puts "4".colorize(:light_yellow)
     puts ' '
-    puts "Your health has gone up to 140!"
+    print "Your health has gone up to "
+    puts "140".colorize(:light_yellow)
     puts ' '
     puts '<Press Enter to Continue>'
     gets

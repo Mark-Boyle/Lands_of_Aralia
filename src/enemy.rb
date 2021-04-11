@@ -1,10 +1,10 @@
 class Enemy
     attr_accessor :type, :enemy_health, :attacking_force
 
-    def initialize(type, enemy_health, attacking_force)
-        @type = type
-        @enemy_health = enemy_health
-        @attacking_force = attacking_force
+    def initialize
+        @type = 'Default'
+        @enemy_health = 100
+        @attacking_force = 0
     end
 
     def generate_attack_damage
