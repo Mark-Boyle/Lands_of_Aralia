@@ -215,3 +215,72 @@ def display_level_3_victory
     puts '<Press Enter to Continue>'
     gets
 end
+
+def display_help_documentation
+puts "Lands of Aralia".colorize(:light_green)
+puts "Lands of Aralia is an action/adventure game run on the terminal."
+puts "Play as an Elf, Dwarf or Warrior to find the Legendary Ruby Gemstone."
+puts "Defeat Goblins, Orcs, Trolls and Dragons in battle."
+puts "Outsmart Witches and Leprechauns with Riddles and Math Problems."
+puts "Level up and gain new weapons all in this exciting game!"
+puts "It was written using Ruby 2.7.2.\n\n"
+
+puts "Installation".colorize(:light_green)
+puts "- Ensure ruby ~> 2.7.2 is installed"
+puts "- cd into src directory"
+puts "- type into the command line `./installation.sh`"
+puts "- This will install the bundler gem"
+puts "- It will then run `bundle install` which will install all the required gems\n\n"
+
+puts "Dependencies".colorize(:light_green)
+puts "- ruby ~> 2.7.2"
+puts "- rspec"
+puts "- artii"
+puts "- colorize"
+puts "- tty-prompt"
+puts "- bundler\n\n"
+
+puts "Command Line Arguments".colorize(:light_green)
+
+puts "- `./aralia.sh --help` or `./aralia.sh -h`"
+puts "Displays help information for the application\n\n"
+
+puts "- `./aralia.sh --elf` or `./aralia.sh -e`"
+puts "Displays information for Elf character.\n\n"
+
+puts "- `./aralia.sh --dwarf` or `./aralia.sh -d`"
+puts "Displays information for Dwarf character.\n\n"
+
+puts "- `./aralia.sh --warrior` or `./aralia.sh -w`"
+puts "Displays information for Warrior character.\n\n"
+
+puts "Usage".colorize(:light_green)
+
+puts "- cd into src directory"
+puts "- type into the command line `./aralia.sh`\n\n"
+
+puts "- Once the program is running read the introduction text and "
+puts "type in the name of your character and press Enter."
+puts "- Next select a character from the menu and confirm choice."
+puts "- The characters have different stats for sword, archery and armour.\n\n"
+
+puts "- The game is played by entering into battle with varies enemies. "
+puts "- Select actions from the menu when prompted."
+puts "- Using a weapon will attack the enemy and cause damage."
+puts "- Search Area will give the character more health or armour. "
+puts "- There is a maximum of 15 armour and 200 health.\n\n"
+
+puts "- The battle ends when you or the enemy reach 0 health."
+puts "- If you reach 0 health you will lose a life and need to retry the same battle."
+puts "- If you lose 3 lives then it's game over.\n\n"
+
+puts "- When you win a battle you level up, gain more health and a new weapon."
+puts "- You then get to choose which path to take next when prompted.\n\n"
+
+puts "- Once you reach level 3 you need to either complete riddles or math problems."
+puts "- You will be asked the question and required to type in your answer."
+puts "- Get 3 correct answers to progress, but 3 incorrect answer means you lose a life.\n\n"
+
+puts "- The game finishes once you defeat the Dragon on level 4." 
+
+end
