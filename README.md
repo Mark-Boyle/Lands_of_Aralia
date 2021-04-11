@@ -71,3 +71,5 @@ Trello was used for the implementation plan:
 ## R10 Help Documentation ##
 
 The help documentation can be found in the README.md file in the ./src directory.
+
+[Help Documenation](./docs/README.md)
